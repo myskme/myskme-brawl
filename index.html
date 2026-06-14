@@ -2482,6 +2482,69 @@ body.shaking-strong{animation:shake .46s cubic-bezier(.36,.07,.19,.97)}
 .history-grid figure{margin:0}
 .history-grid img{width:100%;border-radius:8px;border:1px solid var(--line)}
 .history-grid figcaption{text-align:center;font-size:12px;color:var(--foil);margin-top:4px;font-weight:700}
+/* ── v3 回合制战斗 UI ── */
+.battle-status{display:grid;gap:8px}
+.bs-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bs-head h2{margin:0;font-size:clamp(15px,2.4vw,18px)}
+.wall-bar{position:relative;height:20px;border-radius:10px;overflow:hidden;background:rgba(10,8,13,.72);border:1px solid var(--line)}
+.wall-bar i{display:block;height:100%;background:linear-gradient(90deg,#c0432f,#e8a23a 60%,#7bd0a8);transition:width .4s}
+.wall-bar.low i{background:linear-gradient(90deg,#c0432f,#e85a3a);animation:wallPulse 1s infinite}
+.wall-bar span,.sp-bar span{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;font-weight:900;color:#fff;text-shadow:0 1px 2px #000;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.status-chips{display:flex;flex-wrap:wrap;gap:6px}
+.foe-panel{display:grid;gap:8px}
+.foe-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.foe-head h2{margin:0;font-size:15px}
+.foe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.foe{position:relative;left:auto;top:auto;transform:none;display:grid;gap:5px;padding:10px 8px;border-radius:12px;cursor:pointer;text-align:center;
+  border:1px solid color-mix(in srgb,var(--enemy-color,#9a6fd0) 45%,transparent);
+  background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--enemy-color,#9a6fd0) 20%,transparent),rgba(10,8,13,.72) 72%);
+  box-shadow:var(--bevel);transition:transform .16s,box-shadow .2s,border-color .2s}
+.foe:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 0 16px color-mix(in srgb,var(--enemy-color) 40%,transparent)}
+.foe.focused{border-color:var(--foil);box-shadow:0 0 0 2px var(--foil),0 0 18px rgba(201,168,106,.4)}
+.foe.foe-charged{animation:foeReady 1s ease-in-out infinite}
+@keyframes foeReady{50%{box-shadow:0 0 0 2px var(--ember),0 0 18px var(--ember)}}
+.foe:disabled{cursor:default}
+.foe-sprite{position:relative;width:56px;height:56px;margin:0 auto;color:var(--enemy-color,#9a6fd0);filter:drop-shadow(0 0 8px color-mix(in srgb,var(--enemy-color) 50%,transparent))}
+.foe-sprite svg{width:100%;height:100%;display:block}
+.foe.enemy-boss .foe-sprite,.foe.enemy-hidden .foe-sprite{width:66px;height:66px}
+.foe.enemy-hidden .foe-sprite{animation:mythicPulse 1.7s ease-in-out infinite}
+.foe-arch{position:absolute;right:-4px;top:-4px;min-width:16px;height:16px;padding:0 3px;border-radius:8px;background:var(--ember);color:#fff;font-size:10px;font-weight:900;display:grid;place-items:center}
+.foe-shield{position:absolute;left:-4px;top:-4px;padding:0 4px;height:16px;border-radius:8px;background:#5a8ec8;color:#06121a;font-size:9px;font-weight:900;display:grid;place-items:center}
+.foe-name{font-size:12px;font-weight:800;color:#f0e6d2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.foe-hp,.foe-atb{height:6px;border-radius:4px;overflow:hidden;background:rgba(0,0,0,.5)}
+.foe-hp i{display:block;height:100%;background:linear-gradient(90deg,var(--ember),#e8a23a);transition:width .3s}
+.foe-atb i{display:block;height:100%;background:linear-gradient(90deg,#6c93c4,#9a6fd0);transition:width .35s}
+.foe-intent{font-size:11px;font-weight:800;color:rgba(244,239,230,.82)}
+.foe-skills{display:flex;gap:3px;justify-content:center;flex-wrap:wrap}
+.foe-skill{width:18px;height:18px;display:grid;place-items:center;border-radius:5px;font-size:10px;font-weight:900;background:rgba(192,67,47,.25);border:1px solid rgba(192,67,47,.4);color:#ffb59a}
+.focus-detail{font-size:12px;color:rgba(244,239,230,.72);padding-top:6px;border-top:1px solid var(--line2)}
+.party-top{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}
+.party-sprite{width:38px;height:38px;color:var(--player-color,#c9a86a);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--player-color) 50%,transparent))}
+.party-sprite svg{width:100%;height:100%;display:block}
+.party-id strong{display:block;font-size:14px;color:#f0e6d2}
+.party-id small{font-size:11px;color:rgba(244,239,230,.6)}
+.sp-bar{position:relative;height:16px;margin:7px 0;border-radius:9px;overflow:hidden;background:rgba(10,8,13,.72);border:1px solid var(--line)}
+.sp-bar i{display:block;height:100%;background:linear-gradient(90deg,#5a8ec8,#9a6fd0,#c9a86a);transition:width .35s}
+.sp-bar.ready i{background:var(--foil-grad)}
+.sp-bar.ready{box-shadow:0 0 12px rgba(201,168,106,.5)}
+.skill-btn.ready{border-color:var(--foil);color:var(--foil-bright);animation:odReady 1.2s ease-in-out infinite}
+.dungeon-panel{display:grid;gap:10px}
+.dungeon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.dungeon-node{display:grid;gap:8px;justify-items:center;text-align:center;padding:16px 12px;border-radius:14px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 0%,rgba(201,168,106,.12),rgba(10,8,13,.6) 72%);box-shadow:var(--bevel)}
+.dungeon-node strong{font-size:16px;color:var(--foil-bright)}
+.dn-desc{font-size:12px;color:rgba(244,239,230,.7);line-height:1.5;min-height:54px}
+.dn-sprite{width:54px;height:54px;color:var(--foil)}
+.dn-sprite svg{width:100%;height:100%}
+.dungeon-node.node-treasure{border-color:rgba(201,168,106,.45)}.dungeon-node.node-treasure .dn-sprite{color:#e8c768}
+.dungeon-node.node-elite{border-color:rgba(213,96,96,.4)}.dungeon-node.node-elite .dn-sprite{color:#d56060}
+.dungeon-node.node-rest{border-color:rgba(122,200,160,.4)}.dungeon-node.node-rest .dn-sprite{color:#7bd0a8}
+.dn-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.sprite-portrait{display:grid!important;place-items:center;color:var(--enemy-color,#7bd0a8)}
+.sprite-portrait svg{width:74%;height:74%}
+.sprite-portrait:before,.sprite-portrait:after{content:none!important}
+.coop-armory{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(122,200,160,.08);border:1px solid rgba(122,200,160,.25)}
+.armory-label{font-size:12px;font-weight:800;color:#9fe0c0;margin-right:4px}
+@media (max-width:760px){.foe-grid{grid-template-columns:repeat(auto-fill,minmax(94px,1fr))}}
 </style>
 </head>
 <body data-stage-tab="score" data-aux-tab="game">
@@ -2813,6 +2876,45 @@ const hkHints = [
   "极低概率会出现天命羁绊，送出羁绊卡并提高奇遇概率。"
 ];
 const memoryAssets = {};
+const MYSKME_SVG = {
+  wolf: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>...</svg>",
+  ox: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M30 36 C16 34 8 24 10 16 C18 22 26 26 34 28 C40 24 48 22 50 22 C52 22 60 24 66 28 C74 26 82 22 90 16 C92 24 84 34 70 36 C78 46 78 64 66 76 C60 82 54 84 50 84 C46 84 40 82 34 76 C22 64 22 46 30 36 Z'/><circle cx='40' cy='54' r='4' fill='#f4e3b0'/><circle cx='60' cy='54' r='4' fill='#f4e3b0'/><ellipse cx='50' cy='72' rx='10' ry='6' fill='#f4e3b0' fill-opacity='.5'/></svg>",
+  falcon: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 18 C40 22 36 34 38 44 L10 30 C18 48 30 56 42 56 C40 70 44 84 50 90 C56 84 60 70 58 56 C70 56 82 48 90 30 L62 44 C64 34 60 22 50 18 Z'/><path fill='currentColor' d='M50 18 L44 14 C46 22 54 22 56 14 Z'/><circle cx='50' cy='32' r='3' fill='#f4e3b0'/></svg>",
+  fox: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M26 20 L40 38 C44 36 56 36 60 38 L74 20 L70 42 C80 52 80 70 70 80 L82 92 C70 90 62 84 58 78 C54 80 46 80 42 78 C38 84 30 90 18 92 L30 80 C20 70 20 52 30 42 Z'/><path fill='#f4e3b0' d='M50 64 L44 56 L56 56 Z'/><circle cx='42' cy='50' r='3' fill='#f4e3b0'/><circle cx='58' cy='50' r='3' fill='#f4e3b0'/></svg>",
+  shark: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M8 58 C20 50 34 48 48 50 L58 24 C62 40 62 48 64 52 C76 54 86 56 94 50 C88 60 82 64 76 66 C84 70 88 76 90 84 C80 80 70 78 62 78 C46 80 22 76 8 58 Z'/><path fill='currentColor' fill-opacity='.4' d='M30 60 L24 72 L40 64 Z'/><circle cx='30' cy='56' r='3' fill='#f4e3b0'/></svg>",
+  owl: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M28 18 L36 32 C42 28 58 28 64 32 L72 18 L70 34 C82 44 84 64 76 78 C68 90 56 92 50 92 C44 92 32 90 24 78 C16 64 18 44 30 34 Z'/><circle cx='38' cy='48' r='11' fill='#f4e3b0'/><circle cx='62' cy='48' r='11' fill='#f4e3b0'/><circle cx='38' cy='48' r='5' fill='currentColor'/><circle cx='62' cy='48' r='5' fill='currentColor'/><path fill='#f4e3b0' d='M50 56 L45 62 L55 62 Z'/></svg>",
+  deer: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 40 C44 40 40 46 40 52 C40 64 44 80 50 92 C56 80 60 64 60 52 C60 46 56 40 50 40 Z'/><path fill='currentColor' d='M40 44 C30 38 30 26 24 18 C22 26 18 24 12 22 C18 32 18 30 22 36 C16 36 14 32 8 32 C16 42 28 46 40 50 Z'/><path fill='currentColor' d='M60 44 C70 38 70 26 76 18 C78 26 82 24 88 22 C82 32 82 30 78 36 C84 36 86 32 92 32 C84 42 72 46 60 50 Z'/><circle cx='45' cy='54' r='3' fill='#f4e3b0'/><circle cx='55' cy='54' r='3' fill='#f4e3b0'/></svg>",
+  rabbit: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M38 50 C36 36 34 14 42 10 C50 8 48 30 48 46 C52 46 54 46 52 46 C52 30 50 8 58 10 C66 14 64 36 62 50 C72 56 76 70 72 82 C66 92 56 92 50 92 C44 92 34 92 28 82 C24 70 28 56 38 50 Z'/><circle cx='42' cy='66' r='3' fill='#f4e3b0'/><circle cx='58' cy='66' r='3' fill='#f4e3b0'/></svg>",
+  penguin: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 10 C36 10 28 22 28 38 C24 40 18 48 18 58 C24 56 26 58 28 62 C28 76 36 92 50 92 C64 92 72 76 72 62 C74 58 76 56 82 58 C82 48 76 40 72 38 C72 22 64 10 50 10 Z'/><path fill='#f4e3b0' d='M50 28 C44 28 40 34 40 44 C40 60 44 78 50 84 C56 78 60 60 60 44 C60 34 56 28 50 28 Z'/><path fill='#f4e3b0' d='M50 36 L45 42 L55 42 Z'/><circle cx='43' cy='26' r='2.5' fill='#f4e3b0'/><circle cx='57' cy='26' r='2.5' fill='#f4e3b0'/></svg>",
+  hedgehog: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M14 64 L24 50 L26 60 L36 42 L40 56 L50 36 L56 54 L66 40 L70 58 L80 48 L84 64 C84 76 70 84 50 84 C30 84 16 76 14 64 Z'/><path fill='currentColor' d='M14 64 C8 64 4 70 6 76 C10 70 16 70 20 72 Z'/><circle cx='12' cy='70' r='3' fill='#f4e3b0'/><circle cx='22' cy='74' r='2.5' fill='#f4e3b0'/></svg>",
+  crane: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M70 14 C62 12 54 18 52 28 C50 40 48 52 40 60 C30 68 16 70 10 64 C14 76 28 82 42 78 C40 84 42 90 46 92 L54 92 C50 86 52 78 58 72 C66 64 70 50 70 38 C76 36 80 30 78 24 L90 22 L78 16 Z'/><circle cx='72' cy='24' r='3' fill='#f4e3b0'/><ellipse cx='62' cy='20' rx='6' ry='4' fill='#f4e3b0' fill-opacity='.5'/></svg>",
+  panda: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M30 22 C22 18 14 22 14 30 C14 38 22 40 28 38 C22 50 22 66 32 76 C40 84 46 86 50 86 C54 86 60 84 68 76 C78 66 78 50 72 38 C78 40 86 38 86 30 C86 22 78 18 70 22 C62 16 38 16 30 22 Z'/><ellipse cx='38' cy='50' rx='8' ry='10' fill='currentColor' fill-opacity='.4'/><ellipse cx='62' cy='50' rx='8' ry='10' fill='currentColor' fill-opacity='.4'/><circle cx='38' cy='50' r='3' fill='#f4e3b0'/><circle cx='62' cy='50' r='3' fill='#f4e3b0'/><circle cx='50' cy='64' r='4' fill='#f4e3b0'/></svg>",
+  snake: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M70 14 L84 22 L70 30 C58 30 50 38 50 48 C50 58 58 64 68 64 C82 64 90 74 86 88 C80 78 70 82 64 78 C48 74 36 64 36 50 C36 38 28 32 18 34 C8 36 6 26 14 20 C16 28 26 24 34 28 C50 34 62 30 64 20 C64 16 66 14 70 14 Z'/><path fill='currentColor' d='M70 14 L80 8 C84 14 80 20 74 20 C70 20 68 18 70 14 Z'/><circle cx='76' cy='14' r='2.5' fill='#f4e3b0'/><path fill='#f4e3b0' d='M82 7 L92 4 L84 12 Z'/></svg>",
+  crow: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 22 C44 22 40 28 40 36 L8 28 C16 46 30 52 40 50 C38 60 42 78 50 88 C58 78 62 60 60 50 C70 52 84 46 92 28 L60 36 C60 28 56 22 50 22 Z'/><path fill='currentColor' d='M50 22 L40 16 C44 24 56 24 60 16 Z'/><circle cx='50' cy='34' r='3' fill='#f4e3b0'/></svg>",
+  tiger: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M26 22 C18 18 12 24 14 32 C16 38 22 38 26 36 C20 50 22 68 34 80 C42 88 46 88 50 88 C54 88 58 88 66 80 C78 68 80 50 74 36 C78 38 84 38 86 32 C88 24 82 18 74 22 C64 16 36 16 26 22 Z'/><path fill='currentColor' fill-opacity='.4' d='M50 40 L44 52 L56 52 Z M30 44 L26 56 M70 44 L74 56'/><circle cx='40' cy='50' r='3.5' fill='#f4e3b0'/><circle cx='60' cy='50' r='3.5' fill='#f4e3b0'/><path fill='#f4e3b0' d='M50 58 L45 64 L55 64 Z'/></svg>",
+  lynx: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M30 16 L38 34 C42 30 58 30 62 34 L70 16 L74 36 C82 46 82 64 72 76 C64 86 56 86 50 86 C44 86 36 86 28 76 C18 64 18 46 26 36 Z'/><path fill='currentColor' d='M38 18 L34 6 L44 16 Z M62 18 L66 6 L56 16 Z'/><circle cx='40' cy='50' r='3.5' fill='#f4e3b0'/><circle cx='60' cy='50' r='3.5' fill='#f4e3b0'/><path fill='#f4e3b0' d='M50 58 L46 63 L54 63 Z'/></svg>",
+  parrot: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M44 12 C30 16 22 30 22 46 C22 64 30 82 44 90 C48 86 50 80 50 74 C58 72 66 64 66 54 C72 56 78 52 78 46 C72 44 68 44 64 44 C62 32 56 18 48 12 Z'/><path fill='currentColor' d='M22 46 C16 44 12 50 14 58 C20 56 24 54 26 50 Z'/><circle cx='42' cy='34' r='4' fill='#f4e3b0'/><path fill='#f4e3b0' fill-opacity='.5' d='M48 12 C52 8 60 8 62 14 C56 14 52 14 48 16 Z'/></svg>",
+  wisp: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 12 C36 12 26 24 26 42 C26 54 30 64 30 74 C34 70 38 72 40 78 C44 72 48 74 50 80 C52 74 56 72 60 78 C62 72 66 70 70 74 C70 64 74 54 74 42 C74 24 64 12 50 12 Z'/><circle cx='42' cy='40' r='5' fill='#f4e3b0'/><circle cx='58' cy='40' r='5' fill='#f4e3b0'/><ellipse cx='50' cy='56' rx='5' ry='7' fill='currentColor' fill-opacity='.4'/></svg>",
+  vine: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 92 C48 76 44 64 36 56 C26 46 24 34 30 22 C32 32 38 36 44 38 C40 30 42 20 50 12 C58 20 60 30 56 38 C62 36 68 32 70 22 C76 34 74 46 64 56 C56 64 52 76 50 92 Z'/><path fill='currentColor' d='M44 38 L34 32 L42 44 Z M56 38 L66 32 L58 44 Z M40 56 L30 52 L38 62 Z M60 56 L70 52 L62 62 Z'/><circle cx='50' cy='48' r='4' fill='#f4e3b0'/></svg>",
+  flame: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 8 C50 24 38 30 38 30 C44 26 42 38 36 46 C28 56 28 72 38 82 C44 88 50 90 50 90 C50 90 56 88 62 82 C72 72 72 54 62 44 C58 40 58 34 60 28 C54 36 52 30 56 18 C52 22 50 16 50 8 Z'/><path fill='#f4e3b0' d='M50 56 C46 60 46 70 50 78 C54 70 54 60 50 56 Z'/></svg>",
+  cage: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M48 6 L52 6 L52 12 L48 12 Z'/><path fill='currentColor' d='M50 12 C44 12 44 20 50 20 C56 20 56 12 50 12 Z'/><path fill='currentColor' d='M50 22 C30 22 22 38 22 56 C22 72 28 84 28 84 L72 84 C72 84 78 72 78 56 C78 38 70 22 50 22 Z M50 30 C62 30 68 42 68 56 C68 66 65 76 65 76 L35 76 C35 76 32 66 32 56 C32 42 38 30 50 30 Z'/><path fill='currentColor' d='M48 30 L52 30 L52 76 L48 76 Z M37 32 L41 32 L40 76 L36 76 Z M59 32 L63 32 L64 76 L60 76 Z'/><path fill='currentColor' d='M24 82 L76 82 L76 88 L24 88 Z'/></svg>",
+  rat: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M16 50 C8 44 8 32 16 28 C24 26 30 32 30 40 C36 32 48 30 58 34 C70 38 78 50 76 62 C74 76 60 84 46 82 C44 88 36 88 34 82 C24 80 16 70 16 58 C20 60 24 60 26 58 C22 56 18 54 16 50 Z'/><path fill='currentColor' fill-opacity='.4' d='M76 60 C84 62 92 70 90 82 C86 76 80 74 76 74 Z'/><circle cx='56' cy='52' r='3' fill='#f4e3b0'/><circle cx='80' cy='56' r='2.5' fill='#f4e3b0'/></svg>",
+  serpentqueen: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 30 C36 30 24 38 22 52 C20 64 26 76 26 84 C32 80 40 82 50 82 C60 82 68 80 74 84 C74 76 80 64 78 52 C76 38 64 30 50 30 Z'/><path fill='currentColor' d='M50 30 C46 24 46 14 50 8 C54 14 54 24 50 30 Z'/><path fill='#f4e3b0' d='M50 4 L46 14 L50 11 L54 14 Z'/><circle cx='42' cy='52' r='4' fill='#f4e3b0'/><circle cx='58' cy='52' r='4' fill='#f4e3b0'/><path fill='#f4e3b0' fill-opacity='.6' d='M50 62 L45 70 L50 74 L55 70 Z'/></svg>",
+  darkbird: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='currentColor' d='M50 16 C45 16 42 22 44 28 L52 24 L60 16 L58 26 C66 22 78 22 90 14 C86 30 74 42 60 44 C66 56 64 76 50 90 C36 76 34 56 40 44 C26 42 14 30 10 14 C22 22 34 22 42 26 L40 16 L48 24 L56 28 C58 22 55 16 50 16 Z'/><circle cx='50' cy='34' r='3' fill='#f4e3b0'/></svg>",
+};
+
+
+const ROLE_SPRITE = { mage:"wolf", captain:"ox", vanguard:"falcon", foodie:"deer", director:"shark", detective:"owl" };
+const ENEMY_SPRITE = { yellowTurban:"wisp", mountainRaiders:"vine", ironGuard:"parrot", fireShip:"flame", woodenOx:"cage", darkStrategist:"crow", zhangJiao:"darkbird", huaXiong:"wisp", liRu:"rat", shadowZhangLiao:"snake", jiaXu:"crow", whiteGate:"lynx", dongzhuoBoss:"parrot", simaBoss:"lynx", zhouyuBoss:"snake", lubuBoss:"tiger", wuzhangBoss:"darkbird", darkZhuge:"serpentqueen", darkLubu:"snake" };
+function getSprite(key){ return MYSKME_SVG[key] || MYSKME_SVG.wisp; }
+function getRoleSprite(role){ return getSprite(ROLE_SPRITE[role] || "wolf"); }
+function getEnemySprite(enemy){
+  if (!enemy) return getSprite("wisp");
+  if (ENEMY_SPRITE[enemy.key]) return getSprite(ENEMY_SPRITE[enemy.key]);
+  const t = getEnemyTier(enemy);
+  return getSprite(t === "hidden" ? "serpentqueen" : t === "boss" ? "tiger" : t === "elite" ? "crow" : "wisp");
+}
+
 const roles = {
   mage:{icon:"觉", name:"觉醒战士", skill:"觉醒爆发 +2 并抽羁绊", passive:"答对 +2 时有机会额外 +1。", hint:"爆发型·本相觉醒，适合强答题手。"},
   captain:{icon:"守", name:"护守将", skill:"免费布据点或收号令费", passive:"收租时租金 +1。", hint:"经营型，越早布据点越有压迫感。"},
@@ -3238,7 +3340,11 @@ function createEmptyExpedition(){
     focusIndex:0,
     focusLocked:false,
     surge:0,
-    riskGate:null
+    riskGate:null,
+    weaken:0,
+    battleStartHp:0,
+    battleDamageTaken:0,
+    dungeon:null
   };
 }
 
@@ -3305,6 +3411,11 @@ function normalizePlayers(){
     if (typeof player.skillUsed !== "boolean") player.skillUsed = player.skillCooldown > 0;
     if (typeof player.streak !== "number") player.streak = 0;
     if (typeof player.rankLow !== "number") player.rankLow = players.length;
+    if (typeof player.sp !== "number") player.sp = 0;
+    if (typeof player.exp !== "number") player.exp = 0;
+    if (typeof player.expLevel !== "number") player.expLevel = 1;
+    player.sp = Math.max(0, Math.min(100, player.sp));
+    player.expLevel = Math.max(1, Math.min(30, Math.floor(player.expLevel)));
     if (!Array.isArray(player.inventory)) player.inventory = [];
     if (typeof player.property === "undefined") player.property = null;
     if (typeof player.coins !== "number") player.coins = Math.max(0, Math.floor((player.score || 0) / 2));
@@ -3401,6 +3512,10 @@ function normalizeExpedition(){
   ["heat","overdrive","surge","maxHeat"].forEach(k => expedition[k] = Math.max(0, Math.min(100, expedition[k])));
   if (typeof expedition.waveTier !== "string") expedition.waveTier = "normal";
   if (typeof expedition.focusLocked !== "boolean") expedition.focusLocked = false;
+  if (typeof expedition.weaken !== "number") expedition.weaken = 0;
+  if (typeof expedition.battleDamageTaken !== "number") expedition.battleDamageTaken = 0;
+  if (typeof expedition.battleStartHp !== "number") expedition.battleStartHp = 0;
+  if (expedition.dungeon && typeof expedition.dungeon !== "object") expedition.dungeon = null;
   // migrate a legacy single-enemy run into the lane (old saves)
   if (expedition.active && !expedition.runOver && !expedition.lane.length && expedition.enemy && typeof expedition.enemy === "object"){
     const e = expedition.enemy;
@@ -4422,7 +4537,7 @@ function startExpedition(){
   expedition.active = true;
   expedition.runOver = false;
   expedition.floor = 1;
-  expedition.maxTeamHp = 12 + players.length * 4 + getCoopHpBonus();
+  expedition.maxTeamHp = 16 + players.length * 5 + getCoopHpBonus();
   expedition.teamHp = expedition.maxTeamHp;
   expedition.provisions = players.length + 1;
   expedition.morale = 0;
@@ -4447,59 +4562,75 @@ function restartExpedition(){
   startExpedition();
 }
 
-const ARCHETYPE_SPEED = { normal:16, runner:24, armored:8, elite:14, boss:7, hidden:9 };
 const ARCHETYPE_META = {
-  normal:{label:"游兵", cost:2, badge:""},
-  runner:{label:"疾袭", cost:3, badge:"疾"},
-  armored:{label:"重甲", cost:4, badge:"甲"},
-  elite:{label:"精英", cost:6, badge:"精"},
-  boss:{label:"首领", cost:12, badge:"王"},
-  hidden:{label:"隐魔", cost:16, badge:"隐"}
+  normal:{label:"游兵", badge:"", spd:36, cost:2},
+  runner:{label:"疾袭", badge:"疾", spd:58, cost:3},
+  armored:{label:"重甲", badge:"甲", spd:24, cost:4},
+  elite:{label:"精英", badge:"精", spd:42, cost:6},
+  boss:{label:"首领", badge:"王", spd:38, cost:12},
+  hidden:{label:"隐魔", badge:"隐", spd:42, cost:16}
 };
+const ENEMY_SKILL_META = {
+  dash:{name:"疾驰", icon:"疾", text:"行动条积攒极快，常抢先出手。"},
+  shield:{name:"凝盾", icon:"盾", text:"凝起黑域护罩抵挡攻击。"},
+  split:{name:"分裂", icon:"裂", text:"被击碎时分裂成两个残体。"},
+  clone:{name:"影分身", icon:"影", text:"行动时召出虚影替身。"},
+  drain:{name:"嗜血", icon:"血", text:"攻击时吸取生命回复自身。"},
+  curse:{name:"扰乱", icon:"乱", text:"削弱全队下一击并降士气。"},
+  revive:{name:"复活", icon:"活", text:"倒下后有几率重新站起一次。"},
+  enrage:{name:"狂暴", icon:"怒", text:"残血时攻击大幅提升。"},
+  summon:{name:"召唤", icon:"唤", text:"行动时召来一只黑域游兵。"}
+};
+const ENEMY_SKILLS = {
+  yellowTurban:["dash"], mountainRaiders:["curse"], ironGuard:["shield"],
+  fireShip:["dash","enrage"], woodenOx:["revive"], darkStrategist:["clone","curse"],
+  zhangJiao:["summon","curse"], huaXiong:["enrage","dash"], liRu:["drain","curse"],
+  shadowZhangLiao:["dash","shield"], jiaXu:["clone","curse"], whiteGate:["shield","split"],
+  dongzhuoBoss:["shield","revive","curse"], simaBoss:["clone","curse","drain"],
+  zhouyuBoss:["enrage","dash","summon"], lubuBoss:["enrage","drain","split"],
+  wuzhangBoss:["clone","curse","shield"],
+  darkZhuge:["clone","curse","drain","shield","enrage"], darkLubu:["enrage","drain","split","dash"]
+};
+
+function encounterCap(){ return Math.min(7, 4 + Math.floor(players.length / 2)); }
+function enemyHasSkill(e, key){ return !!(e && e.skills && e.skills.indexOf(key) >= 0); }
 
 function getEnemyArchetype(base){
   const tier = getEnemyTier(base);
-  if (tier === "hidden") return "hidden";
-  if (tier === "boss") return "boss";
-  if (tier === "elite") return "elite";
+  if (tier !== "normal") return tier;
   if (base.key === "yellowTurban" || base.key === "fireShip") return "runner";
   if (base.key === "ironGuard" || base.key === "woodenOx") return "armored";
   return "normal";
 }
 
-function buildSpawnQueue(floor){
+function buildEncounter(floor){
   const hiddenChance = floor >= 8 ? (floor % 10 === 0 ? 0.36 : Math.min(0.14, 0.045 + floor * 0.004)) : 0;
-  const hiddenFloor = hiddenChance > 0 && Math.random() < hiddenChance;
-  const bossFloor = !hiddenFloor && floor % 5 === 0;
-  const eliteFloor = !hiddenFloor && !bossFloor && floor % 3 === 0;
-  const queue = [];
-  let budget = 4 + floor * 2 + Math.max(1, players.length);
-  if (hiddenFloor){ queue.push("hidden"); budget -= ARCHETYPE_META.hidden.cost; }
-  else if (bossFloor){ queue.push("boss"); budget -= ARCHETYPE_META.boss.cost; }
-  else if (eliteFloor){ queue.push("elite"); budget -= ARCHETYPE_META.elite.cost; }
-  const fillers = floor >= 3 ? ["normal","normal","runner","armored","runner"] : ["normal","normal","runner"];
-  let guard = 0;
-  while (budget >= 2 && guard++ < 40){
-    const pick = fillers[Math.floor(Math.random() * fillers.length)];
-    const cost = ARCHETYPE_META[pick].cost;
-    if (cost <= budget){ queue.push(pick); budget -= cost; }
-    else { queue.push("normal"); budget -= 2; }
-  }
-  return queue;
+  const hidden = hiddenChance > 0 && Math.random() < hiddenChance;
+  const boss = !hidden && floor % 5 === 0;
+  const elite = !hidden && !boss && floor % 3 === 0;
+  const comp = [];
+  if (hidden) comp.push("hidden");
+  else if (boss) comp.push("boss");
+  else if (elite) comp.push("elite");
+  const cap = encounterCap();
+  let minions = (comp.length ? 1 : 2) + Math.floor(floor / 3) + (players.length >= 4 ? 1 : 0);
+  minions = Math.max(comp.length ? 0 : 2, Math.min(minions, cap - comp.length));
+  const pool = floor >= 4 ? ["normal","runner","armored","normal","runner","armored"]
+            : floor >= 2 ? ["normal","runner","normal","armored"]
+            : ["normal","normal","runner"];
+  for (let i = 0; i < minions; i++) comp.push(pool[Math.floor(Math.random() * pool.length)]);
+  return comp;
 }
 
 function describeWave(comp){
   const counts = {};
   (comp || []).forEach(a => counts[a] = (counts[a] || 0) + 1);
   const order = ["hidden","boss","elite","armored","runner","normal"];
-  return order.filter(a => counts[a]).map(a => `${ARCHETYPE_META[a].label}×${counts[a]}`).join(" · ") || "黑域余孽";
+  return order.filter(a => counts[a]).map(a => `${(ARCHETYPE_META[a] || {}).label || a}×${counts[a]}`).join(" · ") || "黑域余孽";
 }
 
 function createExpeditionEnemy(floor, archetype){
-  let targetTier = "normal";
-  if (archetype === "hidden") targetTier = "hidden";
-  else if (archetype === "boss") targetTier = "boss";
-  else if (archetype === "elite") targetTier = "elite";
+  const targetTier = (archetype === "hidden" || archetype === "boss" || archetype === "elite") ? archetype : "normal";
   let pool = expeditionEnemies.filter(enemy => getEnemyTier(enemy) === targetTier);
   if (targetTier === "normal" && (archetype === "runner" || archetype === "armored")){
     const flavored = pool.filter(e => getEnemyArchetype(e) === archetype);
@@ -4507,120 +4638,81 @@ function createExpeditionEnemy(floor, archetype){
   }
   const base = pool[Math.floor(Math.random() * pool.length)] || expeditionEnemies[0];
   const playerScale = Math.max(1, players.length);
-  const longRunEase = isCoopMode() ? 0.86 : 1;
+  const longRunEase = isCoopMode() ? 0.9 : 1;
   const tier = getEnemyTier(base);
-  const hpFactor = tier === "hidden" ? 1.58 : tier === "boss" ? 1.32 : tier === "elite" ? 1.14 : 1;
-  const attackBonus = tier === "hidden" ? 3 : tier === "boss" ? 1 : tier === "elite" ? 1 : 0;
-  const finalArch = tier === "normal" ? (archetype && ARCHETYPE_SPEED[archetype] ? archetype : getEnemyArchetype(base)) : getEnemyArchetype(base);
-  const archHpMod = finalArch === "armored" ? 1.28 : finalArch === "runner" ? 0.78 : 1;
-  const maxHp = Math.max(1, Math.round((base.hp + floor * (base.boss ? 4.2 : 2.8) * longRunEase + playerScale * (base.boss ? 4 : 2.6)) * hpFactor * archHpMod));
+  const hpFactor = tier === "hidden" ? 1.6 : tier === "boss" ? 1.34 : tier === "elite" ? 1.16 : 1;
+  const atkBonus = tier === "hidden" ? 3 : tier === "boss" ? 2 : tier === "elite" ? 1 : 0;
+  const finalArch = tier === "normal" ? (ARCHETYPE_META[archetype] ? archetype : getEnemyArchetype(base)) : tier;
+  const archHpMod = finalArch === "armored" ? 1.3 : finalArch === "runner" ? 0.74 : 1;
+  const maxHp = Math.max(1, Math.round((base.hp + floor * (base.boss ? 4 : 2.6) * longRunEase + playerScale * (base.boss ? 4 : 2.2)) * hpFactor * archHpMod));
+  const skills = (ENEMY_SKILLS[base.key] || []).slice();
+  if (finalArch === "runner" && skills.indexOf("dash") < 0) skills.unshift("dash");
+  if (finalArch === "armored" && skills.indexOf("shield") < 0) skills.unshift("shield");
   return {
-    ...base,
-    tier,
-    hp:maxHp,
-    maxHp,
-    attack:base.attack + Math.floor(floor / (isCoopMode() ? 5 : 4)) + attackBonus,
-    archetype:finalArch,
-    speed:ARCHETYPE_SPEED[finalArch] || 16,
-    dist:0,
-    slow:0,
-    enemyShield:0,
-    id:genId()
+    ...base, tier, hp:maxHp, maxHp,
+    attack: base.attack + Math.floor(floor / (isCoopMode() ? 5 : 4)) + atkBonus,
+    archetype: finalArch,
+    spd: (ARCHETYPE_META[finalArch] || ARCHETYPE_META.normal).spd,
+    charge: 0, enemyShield: 0, skills, revivedOnce:false, splitOnce:false, isClone:false,
+    intent: null, id: genId()
   };
 }
 
-function spawnFromQueue(force){
-  if (!expedition.spawnQueue.length) return false;
-  if (!force && expedition.spawnMeter < 2) return false;
-  const arch = expedition.spawnQueue.shift();
-  const enemy = createExpeditionEnemy(expedition.floor, arch);
-  enemy.dist = 0;
-  expedition.lane.push(enemy);
-  expedition.spawnMeter = 0;
-  return true;
-}
-
 function startExpeditionFloor(){
-  expedition.lane = [];
-  expedition.spawnQueue = buildSpawnQueue(expedition.floor);
-  expedition.waveComposition = expedition.spawnQueue.slice();
-  expedition.waveTier = expedition.waveComposition.includes("hidden") ? "hidden" : expedition.waveComposition.includes("boss") ? "boss" : expedition.waveComposition.includes("elite") ? "elite" : "normal";
-  expedition.spawnMeter = 0;
-  expedition.leaks = 0;
+  const comp = buildEncounter(expedition.floor);
+  if (expedition.eliteNext){
+    expedition.eliteNext = false;
+    if (!comp.includes("hidden") && !comp.includes("boss") && !comp.includes("elite")) comp.unshift("elite");
+    if (comp.length < encounterCap()) comp.push(expedition.floor >= 3 ? "armored" : "normal");
+  }
+  expedition.lane = comp.map((arch, i) => {
+    const e = createExpeditionEnemy(expedition.floor, arch);
+    e.charge = Math.min(40, i * 10 + Math.floor(Math.random() * 12));
+    return e;
+  });
+  expedition.waveComposition = comp;
+  expedition.waveTier = comp.includes("hidden") ? "hidden" : comp.includes("boss") ? "boss" : comp.includes("elite") ? "elite" : "normal";
   expedition.focusIndex = 0;
   expedition.focusLocked = false;
   expedition.shield = 0;
+  expedition.weaken = 0;
+  expedition.battleStartHp = expedition.teamHp;
+  expedition.battleDamageTaken = 0;
   expedition.rewards = [];
+  expedition.riskGate = null;
   expedition.shopOffers = drawExpeditionShopOffers();
   expedition.shopRefreshes = 0;
   expedition.shopOpen = false;
-  if (getRelicLevel("ironWall")){
-    const guard = 2 * getRelicLevel("ironWall");
-    expedition.guard += guard;
-    pushExpeditionLog(`断云壁垒展开，队伍获得 ${guard} 护盾。`);
-  }
-  if (getRelicLevel("whiteHorseSaddle")){
-    const guard = getRelicLevel("whiteHorseSaddle");
-    expedition.guard += guard;
-    pushExpeditionLog(`荣的疾翔加速布阵，队伍获得 ${guard} 护盾。`);
-  }
-  if (getRelicLevel("moraleBanner")){
-    const morale = 2 * getRelicLevel("moraleBanner");
-    expedition.morale += morale;
-    pushExpeditionLog(`海的鼓舞振奋全队，士气 +${morale}。`);
-  }
-  if (getRelicLevel("starOracle")){
-    const morale = getRelicLevel("starOracle");
-    expedition.morale += morale;
-    pushExpeditionLog(`诺的观星提前推演敌情，士气 +${morale}。`);
-  }
-  if (getRelicLevel("strategyMap")){
-    const gain = 2 * getRelicLevel("strategyMap");
-    expedition.provisions += gain;
-    pushExpeditionLog(`狼先生的铜印预判路线，开局获得 ${gain} 星尘。`);
-  }
-  // seed the lane with the first 1-2 enemies so it never starts empty
-  spawnFromQueue(true);
-  if (expedition.spawnQueue.length && expedition.waveComposition.length > 2) spawnFromQueue(true);
-  const front = expedition.lane[0];
-  if (front && getRelicLevel("fireToken")){
-    const burn = 3 * getRelicLevel("fireToken");
-    front.hp = Math.max(1, front.hp - burn);
-    pushExpeditionLog(`文的觉醒先发制人，${front.name} 受到 ${burn} 点伤害。`);
-  }
-  if (front && getRelicLevel("starFormation")){
-    const burn = 4 * getRelicLevel("starFormation");
-    front.hp = Math.max(1, front.hp - burn);
-    expedition.morale += 3 * getRelicLevel("starFormation");
-    pushExpeditionLog(`七星坛之力照亮阵前，${front.name} 受到 ${burn} 点伤害，士气提升。`);
-  }
+  if (getRelicLevel("ironWall")){ const g = 2 * getRelicLevel("ironWall"); expedition.guard += g; pushExpeditionLog(`断云壁垒展开，护盾 +${g}。`); }
+  if (getRelicLevel("whiteHorseSaddle")){ const g = getRelicLevel("whiteHorseSaddle"); expedition.guard += g; pushExpeditionLog(`荣的疾翔布阵，护盾 +${g}。`); }
+  if (getRelicLevel("moraleBanner")){ const m = 2 * getRelicLevel("moraleBanner"); expedition.morale += m; pushExpeditionLog(`海的鼓舞，士气 +${m}。`); }
+  if (getRelicLevel("starOracle")){ const m = getRelicLevel("starOracle"); expedition.morale += m; pushExpeditionLog(`诺的观星，士气 +${m}。`); }
+  if (getRelicLevel("strategyMap")){ const g = 2 * getRelicLevel("strategyMap"); expedition.provisions += g; pushExpeditionLog(`狼先生的铜印，开局 +${g} 星尘。`); }
+  const burn = getRelicLevel("fireToken") * 3 + getRelicLevel("starFormation") * 4;
+  if (burn && expedition.lane.length){ const t = expedition.lane[0]; t.hp = Math.max(1, t.hp - burn); if (getRelicLevel("starFormation")) expedition.morale += 3 * getRelicLevel("starFormation"); pushExpeditionLog(`开局火力命中 ${t.name}，-${burn}。`); }
+  expedition.lane.forEach(e => e.intent = rollExpeditionIntent(e));
   expedition.focusIndex = getFrontEnemyIndex();
   syncFrontEnemy();
-  expedition.intent = rollExpeditionIntent(getFrontEnemy());
-  const hiddenInLane = expedition.lane.some(e => e.hidden) || expedition.spawnQueue.includes("hidden");
-  if (hiddenInLane){
-    const hb = expedition.lane.find(e => e.hidden);
-    pushExpeditionLog(`隐藏超强 BOSS 逼近：${hb ? hb.name : "蛇女王"}！这是一场可以载入战报的遭遇。`);
-    pushEvent(`<strong>隐藏 BOSS</strong>｜第 ${expedition.floor} 波黑域裂隙剧烈震动。`);
+  if (expedition.waveTier === "hidden"){
+    pushExpeditionLog(`隐藏超强 BOSS 现身！可载入战报的遭遇。`);
+    pushEvent(`<strong>隐藏 BOSS</strong>｜第 ${expedition.floor} 战黑域裂隙剧烈震动。`);
     launchFireworks(3);
   }
-  pushExpeditionLog(`第 ${expedition.floor} 波：${describeWave(expedition.waveComposition)} 涌向光明壁垒。`);
+  pushExpeditionLog(`第 ${expedition.floor} 战：${describeWave(comp)} 现身，全队迎战。`);
 }
 
 function rollExpeditionIntent(enemy){
-  if (!enemy) return { type: "attack", value: 2, label: "突进", icon: "攻", text: "黑域逼近光明壁垒。" };
-  const pool = ["attack", "attack", "shield", "raid"];
-  const tier = getEnemyTier(enemy);
-  if (enemy.key === "woodenOx") pool.push("heal", "heal");
-  if (enemy.key === "ironGuard") pool.push("shield", "shield");
-  if (enemy.key === "fireShip") pool.push("attack", "attack");
-  if (enemy.key === "darkStrategist" || tier === "elite" || enemy.boss) pool.push("curse", "curse");
-  if (tier === "boss") pool.push("attack", "shield", "curse");
-  if (tier === "hidden") pool.push("attack", "attack", "shield", "heal", "curse", "curse");
+  if (!enemy) return { type:"attack", value:2, label:"突袭", icon:"攻", text:"黑域发起攻击。" };
+  const pool = ["attack","attack","attack"];
+  if (enemyHasSkill(enemy, "shield")) pool.push("shield","shield");
+  if (enemyHasSkill(enemy, "curse")) pool.push("curse","curse");
+  if (enemyHasSkill(enemy, "clone") && expedition.lane.length < encounterCap()) pool.push("clone");
+  if (enemyHasSkill(enemy, "summon") && expedition.lane.length < encounterCap()) pool.push("summon");
+  if (enemy.key === "woodenOx") pool.push("heal");
   const type = pool[Math.floor(Math.random() * pool.length)];
-  const meta = expeditionIntentMeta[type] || expeditionIntentMeta.attack;
+  const meta = { attack:{label:"攻击",icon:"攻"}, shield:{label:"凝盾",icon:"盾"}, curse:{label:"扰乱",icon:"乱"}, clone:{label:"影分身",icon:"影"}, summon:{label:"召唤",icon:"唤"}, heal:{label:"腐蚀回复",icon:"复"} }[type] || {label:"攻击",icon:"攻"};
   const value = Math.max(1, enemy.attack + Math.floor(Math.random() * 2) + (type === "shield" ? 1 : 0));
-  return {type, value, label:meta.label, icon:meta.icon, text:meta.text};
+  return { type, value, label:meta.label, icon:meta.icon, text:"" };
 }
 
 function getCoopSynergyDamage(player, amount){
@@ -4687,7 +4779,7 @@ function spawnFloatAt(x, y, text, opts){
 }
 
 function laneEnemyEl(id){
-  return els.expeditionView ? els.expeditionView.querySelector(`.lane-enemy[data-eid="${id}"]`) : null;
+  return els.expeditionView ? els.expeditionView.querySelector(`[data-eid="${id}"]`) : null;
 }
 
 function flushFx(){
@@ -4708,217 +4800,209 @@ function flushFx(){
   });
 }
 
-function strikeLaneEnemy(index, damage, player, label){
+function partyGuardReduce(){ return players.filter(p => p.role === "captain" && !p.frozen).length; }
+
+function strikeEnemy(index, damage, player, label){
   const lane = expedition.lane;
-  let enemy = lane[index] || getFrontEnemy();
+  const enemy = lane[index];
   if (!enemy) return false;
-  const absorbed = Math.min(expedition.shield, damage);
-  expedition.shield -= absorbed;
-  const realDamage = Math.max(0, damage - absorbed);
-  enemy.hp = Math.max(0, enemy.hp - realDamage);
-  addExpeditionContribution(player, Math.max(1, Math.ceil(realDamage / 2)));
-  if (label) pushExpeditionLog(`${label}对 ${enemy.name} 造成 ${damage} 伤害${absorbed ? `，破盾 ${absorbed}` : ""}。`);
-  if (enemy.hp <= 0){
-    onEnemyKilled(enemy, player);
-    const i = lane.indexOf(enemy);
-    if (i >= 0) lane.splice(i, 1);
-    if (i >= 0 && i < expedition.focusIndex) expedition.focusIndex--;
-    if (expedition.focusIndex >= lane.length) expedition.focusIndex = Math.max(0, lane.length - 1);
-    return true;
+  let dmg = damage;
+  if (enemy.enemyShield > 0){
+    const a = Math.min(enemy.enemyShield, dmg); enemy.enemyShield -= a; dmg -= a;
+    if (a && label) pushExpeditionLog(`${label} 破盾 ${a}。`);
   }
-  return false;
+  enemy.hp = Math.max(0, enemy.hp - dmg);
+  addExpeditionContribution(player, Math.max(1, Math.ceil(damage / 2)));
+  if (label) pushExpeditionLog(`${label} 对 ${enemy.name} 造成 ${damage} 伤害。`);
+  if (enemy.hp <= 0) killEnemy(enemy, player);
+  return enemy.hp <= 0;
 }
 
-// compatibility wrapper for treasures / shop items that strike "the enemy"
+// compatibility wrapper: treasures / cards / shop strike the focused (front) enemy
 function strikeExpeditionEnemy(label, damage, player){
   syncFrontEnemy();
   const idx = getFrontEnemyIndex();
   if (idx < 0) return false;
   const target = expedition.lane[idx];
-  const killed = strikeLaneEnemy(idx, damage, player, label);
+  const killed = strikeEnemy(idx, damage, player, label);
   if (target) pendingFx.push({ enemyId: target.id, text: `-${damage}`, hit: true });
-  checkWaveClear(player);
+  checkBattleClear(player);
   return killed;
+}
+function strikeLaneEnemy(index, damage, player, label){ return strikeEnemy(index, damage, player, label); }
+
+function grantExpeditionXp(amount){
+  if (amount <= 0) return;
+  players.forEach(p => {
+    p.exp = (p.exp || 0) + amount;
+    let lvl = p.expLevel || 1;
+    let need = 8 + (lvl - 1) * 6;
+    while (p.exp >= need && lvl < 30){
+      p.exp -= need; lvl += 1; need = 8 + (lvl - 1) * 6;
+      expedition.maxTeamHp += 2; expedition.teamHp += 2;
+      pushExpeditionLog(`${p.name} 升到 Lv.${lvl}！壁垒上限 +2。`);
+      spawnFloatPlayer(p.id, "LV UP!", "fv-crit");
+    }
+    p.expLevel = lvl;
+  });
+}
+
+function spawnFloatPlayer(pid, text, variant){
+  pendingFx.push({ pid, text, variant: variant || "" });
+}
+
+function killEnemy(enemy, player){
+  if (enemyHasSkill(enemy, "revive") && !enemy.revivedOnce && Math.random() < 0.5){
+    enemy.revivedOnce = true;
+    enemy.hp = Math.max(1, Math.round(enemy.maxHp * 0.4));
+    enemy.charge = 0;
+    pushExpeditionLog(`${enemy.name} 复活，重新站起！`);
+    flashScreen("rgba(157,114,214,.45)"); playTone("mystery");
+    return false;
+  }
+  const idx = expedition.lane.indexOf(enemy);
+  if (idx >= 0) expedition.lane.splice(idx, 1);
+  if (idx >= 0 && idx < expedition.focusIndex) expedition.focusIndex--;
+  if (enemyHasSkill(enemy, "split") && !enemy.isClone && expedition.lane.length + 2 <= encounterCap()){
+    for (let k = 0; k < 2; k++){
+      const m = { ...enemy, id: genId(), isClone: true, name: enemy.name + "·残",
+        maxHp: Math.max(1, Math.round(enemy.maxHp * 0.4)), enemyShield: 0, charge: 18 + k * 22,
+        skills: enemy.skills.filter(x => x !== "split" && x !== "revive"), revivedOnce: true, splitOnce: true };
+      m.hp = m.maxHp; m.attack = Math.max(1, Math.round(enemy.attack * 0.6)); m.intent = rollExpeditionIntent(m);
+      expedition.lane.push(m);
+    }
+    pushExpeditionLog(`${enemy.name} 被击碎，分裂成两个残体！`);
+  }
+  expedition.focusIndex = Math.max(0, Math.min(expedition.focusIndex, expedition.lane.length - 1));
+  onEnemyKilled(enemy, player);
+  return true;
 }
 
 function onEnemyKilled(enemy, player){
   const tier = getEnemyTier(enemy);
   player = player || players[0];
   expedition.defeated += 1;
-  if (player) player.score += enemy.hidden ? 4 : enemy.boss ? 2 : 1;
+  if (player && !enemy.isClone) player.score += enemy.hidden ? 4 : enemy.boss ? 2 : 1;
   addExpeditionContribution(player, enemy.hidden ? 8 : enemy.boss ? 5 : enemy.elite ? 3 : 2);
   expedition.morale += enemy.hidden ? 6 : enemy.boss ? 4 : enemy.elite ? 3 : 2;
-  expedition.provisions += enemy.hidden ? 5 : enemy.boss ? 4 : enemy.elite ? 3 : 2;
-  expedition.overdrive = Math.min(100, expedition.overdrive + (enemy.hidden ? 24 : enemy.boss ? 18 : enemy.elite ? 12 : 8));
-  if (enemy.boss){ expedition.bossKills += 1; if (isCoopMode()) teamBossKills += 1; }
-  if (enemy.hidden) expedition.hiddenBossKills += 1;
-  if (isCoopMode()){
+  expedition.provisions += enemy.isClone ? 1 : enemy.hidden ? 5 : enemy.boss ? 4 : enemy.elite ? 3 : 2;
+  expedition.overdrive = Math.min(100, expedition.overdrive + (enemy.hidden ? 22 : enemy.boss ? 16 : enemy.elite ? 11 : 7));
+  grantExpeditionXp(enemy.hidden ? 9 : enemy.boss ? 6 : enemy.elite ? 4 : enemy.isClone ? 1 : 2);
+  if (enemy.boss && !enemy.isClone){ expedition.bossKills += 1; if (isCoopMode()) teamBossKills += 1; }
+  if (enemy.hidden && !enemy.isClone) expedition.hiddenBossKills += 1;
+  if (isCoopMode() && !enemy.isClone){
     const clearScore = enemy.hidden ? 18 : enemy.boss ? 8 : enemy.elite ? 5 : 3;
-    grantTeamScore(clearScore, enemy.hidden ? "隐藏 BOSS 击杀奖励" : enemy.boss ? "BOSS 击杀奖励" : enemy.elite ? "精英击杀奖励" : "击退奖励");
+    grantTeamScore(clearScore, enemy.hidden ? "隐藏 BOSS 击杀" : enemy.boss ? "BOSS 击杀" : enemy.elite ? "精英击杀" : "击退奖励");
     teamBestFloor = Math.max(teamBestFloor, expedition.floor);
   }
-  if (enemy.boss && getRelicLevel("emperorJade")){
-    grantTeamScore(6 * getRelicLevel("emperorJade"), "自由徽印追加战绩");
-  }
+  if (enemy.boss && getRelicLevel("emperorJade")) grantTeamScore(6 * getRelicLevel("emperorJade"), "自由徽印追加战绩");
   if ((tier === "elite" || enemy.boss) && getRelicLevel("imperialWine")){
-    const morale = 5 * getRelicLevel("imperialWine");
-    expedition.morale += morale;
+    const m = 5 * getRelicLevel("imperialWine"); expedition.morale += m;
     const t = grantRandomExpeditionTreasure();
-    pushExpeditionLog(`庆功星酿点燃战意，士气 +${morale}${t ? `，${t.name} 获得新宝物` : ""}。`);
+    pushExpeditionLog(`庆功星酿点燃战意，士气 +${m}${t ? `，${t.name} 获得新宝物` : ""}。`);
   }
-  pushExpeditionLog(`${enemy.name} 被击退。`);
   if (enemy.boss || enemy.hidden){
-    launchFireworks(enemy.hidden ? 6 : 3);
-    burstConfetti(enemy.hidden ? 60 : 36);
-    flashScreen("rgba(244,227,176,.5)");
-    screenShake(true);
-    playTone(enemy.boss ? "fanfare" : "big");
-  }else{
-    playTone("score");
-  }
+    launchFireworks(enemy.hidden ? 6 : 3); burstConfetti(enemy.hidden ? 60 : 36);
+    flashScreen("rgba(244,227,176,.5)"); screenShake(true); playTone(enemy.boss ? "fanfare" : "big");
+  } else { playTone("score"); }
 }
 
-function applyBossIntent(enemy, intent){
-  if (!enemy || !intent) return;
-  if (intent.type === "shield"){
-    const chainReduce = getRelicLevel("riverChain") * 2;
-    const shieldGain = Math.max(0, intent.value + Math.floor(expedition.floor / 3) - chainReduce);
-    expedition.shield += shieldGain;
-    pushExpeditionLog(`${enemy.name} 凝起黑域护罩 +${shieldGain}${chainReduce ? `，璇的破译压制 ${chainReduce}` : ""}。`);
-  }else if (intent.type === "raid"){
-    const lost = Math.min(expedition.provisions, intent.value);
-    expedition.provisions -= lost;
-    pushExpeditionLog(`${enemy.name} 劫掠星尘，团队 -${lost}。`);
-  }else if (intent.type === "heal"){
-    const heal = intent.value + 1;
-    enemy.hp = Math.min(enemy.maxHp, enemy.hp + heal);
-    pushExpeditionLog(`${enemy.name} 腐蚀回复，生命 +${heal}。`);
-  }else if (intent.type === "curse"){
-    const lost = Math.min(expedition.morale, intent.value);
-    expedition.morale -= lost;
-    pushExpeditionLog(`${enemy.name} 黑域低语，士气 -${lost}。`);
+function enemyAct(e){
+  if (!e || expedition.runOver) return;
+  const intent = e.intent || rollExpeditionIntent(e);
+  if (intent.type === "attack"){
+    let raw = intent.value;
+    if (enemyHasSkill(e, "enrage") && e.hp <= e.maxHp * 0.4) raw = Math.round(raw * 1.6);
+    const guardBlock = Math.min(expedition.guard || 0, raw);
+    expedition.guard = Math.max(0, (expedition.guard || 0) - guardBlock);
+    const dmg = Math.max(0, raw - guardBlock - (getRelicLevel("fortGate") || 0) - partyGuardReduce());
+    expedition.teamHp = Math.max(0, expedition.teamHp - dmg);
+    expedition.battleDamageTaken += dmg;
+    if (enemyHasSkill(e, "drain") && dmg > 0) e.hp = Math.min(e.maxHp, e.hp + Math.ceil(dmg / 2));
+    pushExpeditionLog(`${e.name} ${intent.label}，壁垒 -${dmg}${guardBlock ? `（护盾挡 ${guardBlock}）` : ""}${enemyHasSkill(e, "drain") && dmg > 0 ? "，吸血回复" : ""}。`);
+    if (dmg > 0){ pendingFx.push({ wall: true, text: `-${dmg}`, variant: "breach", hit: true }); flashScreen("rgba(192,67,47,.4)"); }
+  } else if (intent.type === "shield"){
+    e.enemyShield += intent.value;
+    pushExpeditionLog(`${e.name} 凝起黑域护罩 +${intent.value}。`);
+  } else if (intent.type === "curse"){
+    expedition.weaken = Math.max(expedition.weaken || 0, 2);
+    const m = Math.min(expedition.morale, 2); expedition.morale -= m;
+    pushExpeditionLog(`${e.name} 扰乱军心，全队下一击削弱，士气 -${m}。`);
+  } else if (intent.type === "heal"){
+    e.hp = Math.min(e.maxHp, e.hp + intent.value);
+    pushExpeditionLog(`${e.name} 腐蚀回复，生命 +${intent.value}。`);
+  } else if (intent.type === "clone" && expedition.lane.length < encounterCap()){
+    const c = { ...e, id: genId(), isClone: true, name: e.name + "·影", maxHp: Math.max(1, Math.round(e.maxHp * 0.5)), enemyShield: 0, charge: 0, skills: e.skills.filter(x => x !== "clone") };
+    c.hp = c.maxHp; c.attack = Math.max(1, Math.round(e.attack * 0.7)); c.intent = rollExpeditionIntent(c);
+    expedition.lane.push(c); pushExpeditionLog(`${e.name} 召出影分身！`);
+  } else if (intent.type === "summon" && expedition.lane.length < encounterCap()){
+    const m = createExpeditionEnemy(expedition.floor, "normal"); m.charge = 0; m.intent = rollExpeditionIntent(m);
+    expedition.lane.push(m); pushExpeditionLog(`${e.name} 召唤一只黑域游兵！`);
   }
+  if (expedition.teamHp <= 0){ finishExpeditionRun(false); return; }
+  e.intent = rollExpeditionIntent(e);
 }
 
-function advanceLane(){
-  const lane = expedition.lane;
-  const surgeActive = expedition.surge >= 100;
-  // a living boss/hidden still telegraphs its non-march action
-  const boss = lane.find(e => e.boss || e.hidden);
-  if (boss && expedition.intent && expedition.intent.type !== "attack"){
-    applyBossIntent(boss, expedition.intent);
-  }
-  let breached = 0;
-  for (let i = lane.length - 1; i >= 0; i--){
-    const e = lane[i];
-    const spd = e.speed * (e.slow > 0 ? 0.5 : 1) * (surgeActive ? 1.25 : 1) * LANE_SPEED_SCALE;
-    if (e.slow > 0) e.slow -= 1;
-    e.dist = Math.min(108, e.dist + spd);
-    if (e.dist >= 100){
-      const atk = e.attack || 2;
-      const guardBlock = Math.min(expedition.guard || 0, atk);
-      expedition.guard = Math.max(0, (expedition.guard || 0) - guardBlock);
-      const block = getRelicLevel("fortGate") + guardBlock;
-      const dmg = Math.max(0, atk - block);
-      expedition.teamHp = Math.max(0, expedition.teamHp - dmg);
-      expedition.leaks += 1;
-      expedition.surge = Math.min(100, expedition.surge + 5);
-      expedition.heat = Math.max(0, expedition.heat - 30);
-      pushExpeditionLog(`${e.name} 突破壁垒，耐久 -${dmg}${block ? `，护盾抵挡 ${block}` : ""}。`);
-      pendingFx.push({ wall: true, text: `-${dmg}`, variant: "breach", hit: true });
-      breached += 1;
-      lane.splice(i, 1);
-      if (i < expedition.focusIndex) expedition.focusIndex--;
+function enemyPhase(){
+  if (expedition.runOver) return 0;
+  expedition.lane.forEach(e => { if (e) e.charge += e.spd; });
+  let actions = 0, guard = 0;
+  let acted = true;
+  while (acted && guard++ < 16 && !expedition.runOver){
+    acted = false;
+    for (let i = 0; i < expedition.lane.length; i++){
+      const e = expedition.lane[i];
+      if (e && e.charge >= 100){ e.charge -= 100; enemyAct(e); actions += 1; acted = true; if (expedition.runOver) break; }
     }
   }
-  expedition.focusIndex = Math.max(0, Math.min(expedition.focusIndex, expedition.lane.length - 1));
-  if (breached){
-    flashScreen("rgba(192,67,47,.5)");
-    screenShake(true);
-    playTone("breach");
+  return actions;
+}
+
+function checkBattleClear(player){
+  syncFrontEnemy();
+  if (!expedition.runOver && !expedition.lane.length){
+    finishExpeditionFloor(player || players[0]);
+    return true;
   }
-  if (surgeActive) expedition.surge = 30;
-  if (expedition.teamHp <= 0) finishExpeditionRun(false);
-  return breached;
+  return false;
 }
 
-function fireTurrets(player){
-  (expedition.laneTurrets || []).forEach(turret => {
-    if (turret.type === "arrow"){
-      let dmg = 2;
-      if (players.some(p => p.role === "mage")) dmg += 1;
-      const idx = getFrontEnemyIndex();
-      if (idx >= 0 && !expedition.runOver){
-        const target = expedition.lane[idx];
-        strikeLaneEnemy(idx, dmg, player, "光弩台");
-        if (target) pendingFx.push({ enemyId: target.id, text: `-${dmg}`, color: "#9fd0ff" });
-      }
-    }else if (turret.type === "well"){
-      expedition.provisions += 2;
-    }
-  });
-}
-
-function resolveLaneTurn(player, amount, baseDamage){
+function resolveTurn(player, amount, baseDamage){
   if (!expedition.focusLocked) expedition.focusIndex = getFrontEnemyIndex();
   syncFrontEnemy();
   expedition.heat = Math.min(100, expedition.heat + (amount === 2 ? 14 : 6));
   expedition.maxHeat = Math.max(expedition.maxHeat, expedition.heat);
   let damage = baseDamage;
+  if (expedition.weaken > 0){ damage = Math.max(1, damage - 2); expedition.weaken -= 1; }
   let crit = false;
-  if (player.streak >= 3 || expedition.heat >= 50){
-    if (player.streak >= 3) player.streak = 0;
-    damage = damage * 2;
-    crit = true;
-  }
-  if (expedition.heat >= 85) damage += 2;
-  const idx = (expedition.lane[expedition.focusIndex]) ? expedition.focusIndex : getFrontEnemyIndex();
+  const critChance = (player.role === "mage" ? 0.25 : 0) + (player.role === "detective" ? 0.15 : 0) + (expedition.heat >= 50 ? 0.4 : 0) + Math.min(0.24, ((player.expLevel || 1) - 1) * 0.025);
+  if (player.streak >= 3 || Math.random() < critChance){ if (player.streak >= 3) player.streak = 0; damage = Math.round(damage * 2); crit = true; }
+  const idx = expedition.lane[expedition.focusIndex] ? expedition.focusIndex : getFrontEnemyIndex();
   const target = expedition.lane[idx];
   if (idx >= 0 && target){
-    strikeLaneEnemy(idx, damage, player, "");
+    strikeEnemy(idx, damage, player, "");
     pendingFx.push({ enemyId: target.id, text: crit ? `-${damage}!` : `-${damage}`, variant: crit ? "crit" : "", hit: true });
   }
-  if (amount === 2) expedition.overdrive = Math.min(100, expedition.overdrive + 12);
-  fireTurrets(player);
+  player.sp = Math.min(100, (player.sp || 0) + (amount === 2 ? 34 : 18) + (player.role === "detective" ? 6 : 0));
+  if (amount === 2) expedition.overdrive = Math.min(100, expedition.overdrive + 10);
   expedition.heat = Math.max(0, expedition.heat - 8);
-  expedition.spawnMeter += 1;
-  spawnFromQueue(false);
-  advanceLane();
-  if (!checkWaveClear(player) && !expedition.runOver){
-    const front = getFrontEnemy();
-    if (front) expedition.intent = rollExpeditionIntent(front);
-  }
-  if (crit){ playTone("crit"); flashScreen("rgba(244,227,176,.32)"); }
-}
-
-function ensureLaneFilled(){
-  if (!expedition.lane.length && expedition.spawnQueue.length) spawnFromQueue(true);
-  syncFrontEnemy();
-}
-
-function checkWaveClear(player){
-  syncFrontEnemy();
-  if (!expedition.runOver && !expedition.lane.length && !expedition.spawnQueue.length){
-    finishExpeditionFloor(player || players[0]);
-    return true;
-  }
-  ensureLaneFilled();
-  return false;
+  let enemyTurn = true;
+  if (player.role === "vanguard" && amount === 2 && Math.random() < 0.32){ enemyTurn = false; pushExpeditionLog(`${player.name} 越界先锋·疾风连击，黑域来不及反应！`); }
+  if (enemyTurn) enemyPhase();
+  if (!checkBattleClear(player)) { /* enemy intents re-rolled in enemyAct */ }
+  if (crit){ playTone("crit"); flashScreen("rgba(244,227,176,.3)"); }
 }
 
 function expeditionAnswer(id, amount){
-  if (!expedition.active || expedition.runOver || expedition.rewards.length || expedition.riskGate) return;
+  if (!expedition.active || expedition.runOver || expedition.rewards.length || expedition.riskGate || expedition.dungeon) return;
   const player = players.find(item => item.id === id);
   if (!player) return;
-  ensureLaneFilled();
+  syncFrontEnemy();
   if (!expedition.enemy) return;
   if (player.frozen){
-    snapshot();
-    player.frozen = false;
-    pushExpeditionLog(`${player.name} 解除暂停，回到讨伐阵线。`);
-    render();
-    saveState();
-    return;
+    snapshot(); player.frozen = false;
+    pushExpeditionLog(`${player.name} 解除暂停，回到战线。`);
+    render(); saveState(); return;
   }
   snapshot();
   const finalAmount = applyScoreModifiers(player, amount);
@@ -4930,19 +5014,18 @@ function expeditionAnswer(id, amount){
   recordCoopAnswer(player, amount, finalAmount, synergyDamage);
   addExpeditionContribution(player, finalAmount);
   expedition.morale += amount;
-  if (amount === 2 && getRelicLevel("whiteHorseSaddle")){
-    expedition.morale += getRelicLevel("whiteHorseSaddle");
-  }
+  if (amount === 2 && getRelicLevel("whiteHorseSaddle")) expedition.morale += getRelicLevel("whiteHorseSaddle");
   expedition.provisions += amount + getRelicLevel("grainRoute");
-  if (player.role === "foodie" && Math.random() < 0.35){
+  if (player.role === "foodie" && Math.random() < 0.4){
     expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + 1);
-    pushExpeditionLog(`${player.name} 的星尘补给生效，壁垒耐久 +1。`);
+    pushExpeditionLog(`${player.name} 调和补给，壁垒 +1。`);
   }
+  if (player.role === "captain") expedition.guard += 1;
   if (player.role === "detective") expedition.morale += 1;
   pushExpeditionLog(`${player.name} 答对 +${amount}，获得 ${earnedCoins} 星尘。`);
   pendingFx.push({ pid: player.id, text: `+${finalAmount}`, color: "#f4e3b0" });
   maybeDropChest(player, amount);
-  resolveLaneTurn(player, amount, baseDamage);
+  resolveTurn(player, amount, baseDamage);
   advanceRound();
   render();
   flushFx();
@@ -4951,75 +5034,60 @@ function expeditionAnswer(id, amount){
 
 function finishExpeditionFloor(player){
   const wt = expedition.waveTier || "normal";
-  const waveEnemy = { tier: wt, boss: wt === "boss" || wt === "hidden", hidden: wt === "hidden", elite: wt === "elite", name: "黑域浪潮" };
+  const waveEnemy = { tier: wt, boss: wt === "boss" || wt === "hidden", hidden: wt === "hidden", elite: wt === "elite", name: "黑域战团" };
   const isMajor = wt === "elite" || wt === "boss" || wt === "hidden";
   expedition.wavesCleared = (expedition.wavesCleared || 0) + 1;
-  // PERFECT WAVE
-  if ((expedition.leaks || 0) === 0){
+  if ((expedition.battleDamageTaken || 0) === 0){
     expedition.perfectWaves = (expedition.perfectWaves || 0) + 1;
-    const bonusMorale = 5;
-    const bonusStardust = 2 + players.length;
-    expedition.morale += bonusMorale;
-    expedition.provisions += bonusStardust;
-    if (isCoopMode()) grantTeamScore(4, "完美防线奖励");
-    pushExpeditionLog(`完美防线！本波零泄漏，士气 +${bonusMorale}，星尘 +${bonusStardust}。`);
-    pendingFx.push({ wall: true, text: "完美!", variant: "crit" });
-    flashScreen("rgba(244,227,176,.55)");
-    playTone("perfect");
+    expedition.morale += 5; expedition.provisions += 2 + players.length;
+    if (isCoopMode()) grantTeamScore(4, "无伤战奖励");
+    pushExpeditionLog(`无伤之战！本战零损耗，士气 +5，星尘 +${2 + players.length}。`);
+    pendingFx.push({ wall: true, text: "无伤!", variant: "crit" });
+    flashScreen("rgba(244,227,176,.55)"); playTone("perfect");
   }
   if (isCoopMode()) teamBestFloor = Math.max(teamBestFloor, expedition.floor + 1);
-  if (getRelicLevel("greenBag")){
-    const heal = 3 * getRelicLevel("greenBag");
-    expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + heal);
-    pushExpeditionLog(`晰的棒棒糖修整队伍，壁垒耐久 +${heal}。`);
-  }
+  if (getRelicLevel("greenBag")){ const h = 3 * getRelicLevel("greenBag"); expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + h); pushExpeditionLog(`晰的棒棒糖修整，壁垒 +${h}。`); }
   expedition.rewards = drawExpeditionRewards(waveEnemy);
-  pushExpeditionLog(`第 ${expedition.floor} 波被击退。选择一件遗物后迎接下一波。`);
-  pushEvent(`<strong>守壁告捷</strong>｜${player ? player.name : "光明同盟"} 守住第 ${expedition.floor} 波，推进到第 ${expedition.floor + 1} 波。`);
+  pushExpeditionLog(`第 ${expedition.floor} 战告捷！选择一件遗物。`);
+  pushEvent(`<strong>战团告捷</strong>｜${player ? player.name : "光明同盟"} 清空第 ${expedition.floor} 战。`);
   launchFireworks(isMajor ? 4 : 2);
   burstConfetti(wt === "hidden" ? 72 : wt === "boss" ? 42 : 26);
   playTone(isMajor ? "fanfare" : "wave");
 }
 
 function triggerOverdrive(){
-  if (!expedition.active || expedition.runOver || expedition.overdrive < 100 || expedition.rewards.length) return;
+  if (!expedition.active || expedition.runOver || expedition.overdrive < 100 || expedition.rewards.length || expedition.dungeon) return;
   snapshot();
-  const dmg = 8 + expedition.floor;
+  const dmg = 7 + Math.round(expedition.floor * 1.5) + (players.length * 2);
   expedition.overdrive = 0;
   expedition.overdrivesFired = (expedition.overdrivesFired || 0) + 1;
-  flashScreen("rgba(255,255,255,.85)");
-  screenShake(true);
-  launchFireworks(4);
-  playTone("overdrive");
-  pushExpeditionLog(`光明审判降临！全体黑域受到 ${dmg} 点伤害并被击退。`);
-  // hit every enemy, push survivors back to the rift
+  flashScreen("rgba(255,255,255,.85)"); screenShake(true); launchFireworks(4); playTone("overdrive");
+  pushExpeditionLog(`光明审判降临！全体黑域受到 ${dmg} 点神圣伤害。`);
   for (let i = expedition.lane.length - 1; i >= 0; i--){
     const e = expedition.lane[i];
+    if (!e) continue;
     pendingFx.push({ enemyId: e.id, text: `-${dmg}`, variant: "crit", hit: true });
-    strikeLaneEnemy(i, dmg, players[0], "");
+    e.enemyShield = 0;
+    strikeEnemy(i, dmg, players[0], "");
   }
-  expedition.lane.forEach(e => e.dist = 0);
-  expedition.shield = 0;
-  checkWaveClear(players[0]);
-  render();
-  flushFx();
-  saveState();
+  checkBattleClear(players[0]);
+  render(); flushFx(); saveState();
 }
 
-function buyTurret(type){
-  if (!expedition.active || expedition.runOver) return;
-  if ((expedition.laneTurrets || []).length >= 2){ showToast("布防位已满（最多 2 座）。"); return; }
-  const cost = type === "arrow" ? 5 : 4;
-  if (expedition.provisions < cost){ showToast("星尘不足，无法布防。"); return; }
+function coopArmory(type){
+  if (!isCoopMode() || !expedition.active || expedition.runOver) return;
+  const cost = { wall:14, charge:10, stardust:8, revive:20 }[type] || 999;
+  if (teamScore < cost){ showToast("团队总分不足，无法转换军备。"); return; }
+  if (type === "revive" && !expedition.reviveUsed){ showToast("续命资格未消耗，无需复苏。"); return; }
   snapshot();
-  expedition.provisions -= cost;
-  expedition.laneTurrets.push({ type, level: 1 });
-  const name = type === "arrow" ? "光弩台" : "星尘井";
-  pushExpeditionLog(`布防完成：${name} 镇守壁垒。`);
-  showToast(`已布防 ${name}。`);
-  playTone("big");
-  render();
-  saveState();
+  teamScore -= cost;
+  if (type === "wall"){ expedition.maxTeamHp += 6; expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + 6); pushExpeditionLog("同盟军备·强化壁垒：上限 +6 并回复 6。"); }
+  else if (type === "charge"){ players.forEach(p => p.sp = Math.min(100, (p.sp || 0) + 50)); pushExpeditionLog("同盟军备·全队充能：技力 +50。"); }
+  else if (type === "stardust"){ expedition.provisions += 10; pushExpeditionLog("同盟军备·星尘补给：星尘 +10。"); }
+  else if (type === "revive"){ expedition.reviveUsed = false; pushExpeditionLog("同盟军备·复苏徽记：恢复一次续命资格。"); }
+  showToast(`同盟军备已转换（−${cost} 团队分）。`);
+  playTone("big"); flashScreen("rgba(122,200,160,.35)");
+  render(); saveState();
 }
 
 function finishExpeditionRun(victory, reason = "defeat"){
@@ -5113,15 +5181,12 @@ function chooseExpeditionReward(key){
     pushExpeditionLog(`天命功勋册闪耀，星尘 +${level}${isCoopMode() ? `，团队总分 +${5 * level}` : ""}。`);
   }
   expedition.floor += 1;
-  startExpeditionFloor();
+  expedition.dungeon = generateDungeonNodes(expedition.floor);
   const treasureTarget = grantRandomExpeditionTreasure();
   if (treasureTarget){
     pushExpeditionLog(`${treasureTarget.name} 获得一个个人神秘宝物。`);
   }
-  if (key === "wolongBook"){
-    expedition.intent = rollExpeditionIntent(expedition.enemy);
-  }
-  pushExpeditionLog(`获得${rarity.label}遗物：${relic.name}。`);
+  pushExpeditionLog(`获得${rarity.label}遗物：${relic.name}。进入黑域地牢，选择前路。`);
   showToast(`获得${rarity.label}遗物：${relic.name}`);
   if (rarity.key === "legend" || rarity.key === "mythic"){
     launchFireworks(rarity.fire);
@@ -5395,58 +5460,57 @@ function useExpeditionTreasure(id){
 }
 
 function useExpeditionSkill(id){
-  if (!expedition.active || expedition.runOver || expedition.rewards.length) return;
+  if (!expedition.active || expedition.runOver || expedition.rewards.length || expedition.dungeon || expedition.riskGate) return;
   const player = players.find(item => item.id === id);
-  if (!player || player.skillCooldown > 0) return;
-  const role = roles[player.role] || roles.mage;
+  if (!player || (player.sp || 0) < 100) return;
   snapshot();
-  let damage = 0;
+  player.sp = 0;
+  player.skillUsed = true;
+  const bonus = getRelicLevel("thunderArrow") + getRelicLevel("wolongBook") * 2;
+  const lvl = player.expLevel || 1;
+  const frontIdx = getFrontEnemyIndex();
   let message = "";
   if (player.role === "mage"){
-    damage = 4;
+    const dmg = 8 + lvl + bonus;
+    if (frontIdx >= 0){ const t = expedition.lane[frontIdx]; pendingFx.push({ enemyId: t.id, text: `-${dmg}!`, variant: "crit", hit: true }); strikeEnemy(frontIdx, dmg, player, "觉醒斩"); }
     addLootCard(player, drawLootCard(player));
-    message = `${player.name} 释放觉醒奇策，打出爆发并获得羁绊。`;
-  }else if (player.role === "captain"){
-    expedition.provisions += 4;
-    expedition.guard += 2;
-    message = `${player.name} 立下守护号令，星尘 +4，护盾 +2。`;
-  }else if (player.role === "vanguard"){
-    damage = 3;
-    expedition.morale += 2;
-    message = `${player.name} 越界突进，士气 +2。`;
-  }else if (player.role === "foodie"){
-    const heal = 5;
-    expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + heal);
-    expedition.provisions += 1;
-    message = `${player.name} 开启治愈结界，壁垒耐久 +${heal}，星尘 +1。`;
-  }else if (player.role === "director"){
-    const broken = Math.min(expedition.shield, 4);
-    expedition.shield -= broken;
-    damage = 2;
-    expedition.morale += 1;
-    message = `${player.name} 发出决斗战书，破盾 ${broken}，士气 +1。`;
-  }else if (player.role === "detective"){
-    damage = 1;
-    expedition.morale += 3;
-    expedition.intent = rollExpeditionIntent(expedition.enemy);
-    message = `${player.name} 观星预判，士气 +3，并刷新敌军意图。`;
-  }else{
-    damage = 1;
-    message = `${player.name} 使用职业奇策。`;
+    message = `${player.name} 觉醒斩！对焦点爆发 ${dmg} 并抽到羁绊。`;
+    flashScreen("rgba(244,227,176,.5)");
+  } else if (player.role === "captain"){
+    const g = 6 + players.length * 2;
+    expedition.guard += g; expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + 4);
+    message = `${player.name} 守护结界！全队护盾 +${g}，壁垒 +4。`;
+    flashScreen("rgba(122,200,160,.35)");
+  } else if (player.role === "vanguard"){
+    const dmg = 4 + Math.floor(lvl / 2) + bonus;
+    expedition.lane.slice().forEach(e => { const ix = expedition.lane.indexOf(e); if (ix >= 0){ pendingFx.push({ enemyId: e.id, text: `-${dmg}`, hit: true }); strikeEnemy(ix, dmg, player, ""); } });
+    message = `${player.name} 急行突袭！全体黑域受到 ${dmg} 点扫荡。`;
+    flashScreen("rgba(122,200,160,.4)"); screenShake();
+  } else if (player.role === "foodie"){
+    const heal = 8 + players.length * 2;
+    expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + heal); expedition.weaken = 0; expedition.morale += 3;
+    message = `${player.name} 星尘治愈！壁垒 +${heal}，净化减益，士气 +3。`;
+    flashScreen("rgba(143,230,168,.4)");
+  } else if (player.role === "director"){
+    let tIdx = frontIdx, best = -1;
+    expedition.lane.forEach((e, ix) => { if (e.hp > best){ best = e.hp; tIdx = ix; } });
+    if (tIdx >= 0){ const t = expedition.lane[tIdx]; const exec = t.hp <= t.maxHp * 0.35 ? t.hp : (6 + lvl + bonus); pendingFx.push({ enemyId: t.id, text: `-${Math.min(exec, t.hp)}!`, variant: "crit", hit: true }); strikeEnemy(tIdx, exec, player, "决斗宣言"); }
+    message = `${player.name} 决斗宣言！锁定最强黑域处决。`;
+    flashScreen("rgba(213,96,96,.4)");
+  } else if (player.role === "detective"){
+    players.forEach(p => p.sp = Math.min(100, (p.sp || 0) + 40));
+    expedition.morale += 4;
+    message = `${player.name} 星象预言！全队技力 +40，士气 +4。`;
+    flashScreen("rgba(157,114,214,.4)");
+  } else {
+    message = `${player.name} 释放奇策。`;
   }
-  if (damage > 0) damage += getRelicLevel("thunderArrow") + getRelicLevel("wolongBook") * 2;
-  if (damage > 0 && getRelicLevel("wolongBook")){
-    expedition.intent = rollExpeditionIntent(expedition.enemy);
-  }
-  player.skillCooldown = 3;
-  player.skillUsed = true;
   pushExpeditionLog(message);
-  if (isCoopMode()) grantTeamScore(1, "职业奇策协作");
-  if (damage > 0) strikeExpeditionEnemy(`${role.name}奇策`, damage, player);
-  pushEvent(`<strong>远征奇策</strong>｜${message}`);
-  playTone(damage >= 4 ? "fanfare" : "mystery");
-  render();
-  saveState();
+  pushEvent(`<strong>必杀技</strong>｜${message}`);
+  if (isCoopMode()) grantTeamScore(2, "必杀协作");
+  launchFireworks(2); playTone("fanfare");
+  checkBattleClear(player);
+  render(); flushFx(); saveState();
 }
 
 function useExpeditionCard(id){
@@ -5970,16 +6034,16 @@ async function generateExpeditionShareImage(){
   ctx.fillText("MYSKME 守壁战报", 92, 135);
   ctx.fillStyle = "#c9a86a";
   ctx.font = `900 32px ${SHARE_SANS}`;
-  ctx.fillText("黑域远征 · 守卫光明壁垒", 94, 184);
+  ctx.fillText("黑域远征 · 回合制战团", 94, 184);
   ctx.fillStyle = "rgba(255,255,255,.72)";
   ctx.font = `700 25px ${SHARE_SANS}`;
   ctx.fillText(new Date().toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }), 94, 226);
 
   const wallPct = Math.round(expedition.teamHp / Math.max(1, expedition.maxTeamHp) * 100);
   const statColor = summary.best.color || "#c9a86a";
-  drawShareStat(ctx, "最终波次", `第 ${expedition.floor} 波`, 94, 300, 430, 125);
+  drawShareStat(ctx, "最深战", `第 ${expedition.floor} 战`, 94, 300, 430, 125);
   drawShareStat(ctx, "击退黑域", expedition.defeated, 556, 300, 430, 125);
-  drawShareStat(ctx, "完美波次", expedition.perfectWaves || 0, 94, 450, 430, 125);
+  drawShareStat(ctx, "无伤战", expedition.perfectWaves || 0, 94, 450, 430, 125);
   drawShareStat(ctx, "壁垒残存", `${wallPct}%`, 556, 450, 430, 125);
   drawShareStat(ctx, isCoopMode() ? "团队总分" : "Boss/隐藏", isCoopMode() ? teamScore : `${expedition.bossKills}/${expedition.hiddenBossKills}`, 94, 600, 430, 125);
   drawShareStat(ctx, "最高掉落", summary.best.label, 556, 600, 430, 125, statColor);
@@ -6298,58 +6362,168 @@ function openHistoryCards(){
   overlay.classList.add("show");
 }
 
+function renderLogPanel(){
+  return `<section class="expedition-panel expedition-copy"><h2>远征战报</h2><div class="expedition-log">${expedition.log.length ? expedition.log.slice(0,14).map(it => `<div class="event"><strong>${escapeHtml(it.time)}</strong> ${escapeHtml(it.message)}</div>`).join("") : `<div class="event">还没有远征战报。</div>`}</div></section>`;
+}
+
+function renderFoeCard(e, i){
+  const hpPct = Math.max(0, Math.round((e.hp||0)/Math.max(1,e.maxHp||1)*100));
+  const chargePct = Math.max(0, Math.min(100, Math.round(e.charge||0)));
+  const tier = getEnemyTier(e);
+  const focused = i === expedition.focusIndex;
+  const intent = e.intent || {icon:"攻", label:"攻击", type:"attack", value:e.attack};
+  const skillTags = (e.skills||[]).map(sk => ENEMY_SKILL_META[sk] ? `<span class="foe-skill" title="${escapeHtml(ENEMY_SKILL_META[sk].name+"："+ENEMY_SKILL_META[sk].text)}">${ENEMY_SKILL_META[sk].icon}</span>` : "").join("");
+  const busy = expedition.rewards.length || expedition.dungeon || expedition.riskGate;
+  return `<button class="foe enemy-${tier} ${focused?"focused":""} ${chargePct>=82?"foe-charged":""}" data-eid="${e.id}" data-expedition-focus="${i}" ${busy?"disabled":""} style="--enemy-color:${e.color||"#9a6fd0"}">
+    <div class="foe-sprite">${getEnemySprite(e)}${e.enemyShield>0?`<span class="foe-shield">盾${e.enemyShield}</span>`:""}${(ARCHETYPE_META[e.archetype]&&ARCHETYPE_META[e.archetype].badge)?`<span class="foe-arch">${ARCHETYPE_META[e.archetype].badge}</span>`:""}</div>
+    <div class="foe-name">${escapeHtml(e.name)}</div>
+    <div class="foe-hp" title="生命 ${e.hp}/${e.maxHp}"><i style="width:${hpPct}%"></i></div>
+    <div class="foe-atb" title="行动条 ${chargePct}%"><i style="width:${chargePct}%"></i></div>
+    <div class="foe-intent">${escapeHtml(intent.icon||"攻")} ${escapeHtml(intent.label||"攻击")}${intent.type==="attack"?" "+(intent.value||e.attack):""}</div>
+    ${skillTags?`<div class="foe-skills">${skillTags}</div>`:""}
+  </button>`;
+}
+
+const ROLE_ULT = { mage:"觉醒斩", captain:"守护结界", vanguard:"急行突袭", foodie:"星尘治愈", director:"决斗宣言", detective:"星象预言" };
+
+function renderPartyRow(lockActions){
+  const busy = lockActions || expedition.rewards.length || expedition.runOver || expedition.riskGate || expedition.dungeon;
+  const rows = players.map(player => {
+    const role = roles[player.role] || roles.mage;
+    const sp = player.sp || 0;
+    const treasure = player.expeditionTreasure ? expeditionTreasures[player.expeditionTreasure] : null;
+    const tr = treasure ? getRarityMeta(treasure.rarity) : null;
+    const activeCardKey = player.inventory.find(k => lootCards[k] && lootCards[k].type === "active");
+    const activeCard = activeCardKey ? lootCards[activeCardKey] : null;
+    return `<article class="expedition-player" data-pid="${player.id}" style="--player-color:${player.color}">
+      <div class="party-top">
+        <span class="party-sprite">${getRoleSprite(player.role)}</span>
+        <div class="party-id"><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(role.name)} · Lv.${player.expLevel||1}</small></div>
+        <span class="mini-tag">${isCoopMode()?"贡献":"分"} ${player.score}</span>
+      </div>
+      <div class="sp-bar ${sp>=100?"ready":""}" title="必杀技力"><i style="width:${sp}%"></i><span>${sp>=100?"必杀就绪":"技力 "+sp}</span></div>
+      <div class="resource-strip">
+        <span class="mini-tag">星尘 ${player.coins}</span>
+        <span class="mini-tag ${tr?getRarityClass(tr.key):""}" ${tr?`style="${getRarityStyle(tr.key)}"`:""}>${treasure?tr.label+" "+treasure.name:"无宝物"}</span>
+      </div>
+      <div class="expedition-hit-actions">
+        <button class="primary-btn" type="button" data-expedition-hit="${player.id}" data-expedition-score="1" ${busy?"disabled":""}>+1</button>
+        <button class="primary-btn" type="button" data-expedition-hit="${player.id}" data-expedition-score="2" ${busy?"disabled":""}>+2</button>
+        <button class="ghost-btn skill-btn ${sp>=100?"ready":""}" type="button" data-expedition-skill="${player.id}" ${busy||sp<100?"disabled":""}>必杀·${ROLE_ULT[player.role]||"奇策"}</button>
+        <button class="ghost-btn" type="button" data-expedition-card="${player.id}" ${busy||!activeCard?"disabled":""}>羁绊</button>
+        <button class="ghost-btn" type="button" data-expedition-treasure="${player.id}" ${busy||!treasure?"disabled":""}>宝物</button>
+      </div>
+    </article>`;
+  }).join("");
+  return `<section class="expedition-panel expedition-copy"><h2>出战队伍 · 答题即出手</h2><div class="expedition-roster">${rows}</div></section>`;
+}
+
 function renderExpedition(){
   if (!els.expeditionView) return;
   normalizeExpedition();
-  const modeText = isCoopMode() ? `${players.length} 人合作闯关` : players.length === 1 ? "单人闯关" : `${players.length} 人合作讨伐`;
+  const modeText = isCoopMode() ? `${players.length} 人同盟远征` : players.length === 1 ? "单人远征" : `${players.length} 人组队远征`;
   if (!expedition.active && !expedition.runOver){
     els.expeditionView.innerHTML = `
       <div class="expedition-hero">
         <section class="expedition-panel">
-          <div class="expedition-art" aria-hidden="true"></div>
           <div class="expedition-copy">
-            <h2>黑域远征</h2>
-            <p>${modeText}。每次开局都会随机敌人、意图、个人宝物和遗物路线；击败敌人后三选一升级。</p>
+            <h2>黑域远征 · 回合制战团</h2>
+            <p>${modeText}。黑域成群来袭——答题即出手，攒满技力放必杀，攻防之间守住光明壁垒。每战之间还能闯地牢、赌宝箱、养成升级。</p>
             <div class="expedition-actions">
               <button class="primary-btn" type="button" data-expedition-start="1">开始远征</button>
-              <button class="ghost-btn" type="button" data-expedition-undo="1">撤回远征操作</button>
-              <span class="chip">1-6 人可玩</span>
-              <span class="chip">Roguelike 三选一</span>
+              <button class="ghost-btn" type="button" data-expedition-undo="1">撤回</button>
+              <span class="chip">回合制 JRPG</span><span class="chip">敌人技能</span><span class="chip">养成 · 地牢</span>
             </div>
           </div>
         </section>
         <section class="expedition-panel enemy-card">
           <div class="enemy-top">
-            <div class="enemy-seal" style="--enemy-color:#d69a39">讨</div>
-            <div>
-              <h2>挑战 NPC</h2>
-              <p>单人时追求更高层数，多人时一起守住壁垒耐久。老师可以点 +1 / +2，也可以使用奇策、羁绊和远征商店。</p>
-            </div>
-            <span class="enemy-badge">新模式</span>
+            <div class="enemy-portrait sprite-portrait" style="--enemy-color:#7bd0a8">${getSprite("serpentqueen")}</div>
+            <div><h2>讨伐蛇女王叶王</h2><p>黑域大军每战成群涌来，带影分身 / 复活 / 分裂 / 疾驰等花样。组好职业搭配，一键出手。</p></div>
           </div>
           <div class="expedition-stats">
-            <div class="expedition-stat"><small>起始壁垒耐久</small><strong>${12 + players.length * 4 + getCoopHpBonus()}</strong></div>
+            <div class="expedition-stat"><small>起始壁垒</small><strong>${16 + players.length * 5 + getCoopHpBonus()}</strong></div>
             <div class="expedition-stat"><small>队伍规模</small><strong>${players.length}</strong></div>
-            <div class="expedition-stat"><small>${isCoopMode() ? "团队总分" : "奖励方式"}</small><strong>${isCoopMode() ? teamScore : "三选一"}</strong></div>
-            <div class="expedition-stat"><small>${isCoopMode() ? "职业搭配" : "敌人刷新"}</small><strong>${isCoopMode() ? `${getTeamRoleDiversity()} 种` : "随机"}</strong></div>
+            <div class="expedition-stat"><small>${isCoopMode()?"团队总分":"奖励"}</small><strong>${isCoopMode()?teamScore:"三选一"}</strong></div>
+            <div class="expedition-stat"><small>职业搭配</small><strong>${getTeamRoleDiversity()} 种</strong></div>
           </div>
         </section>
-      </div>
-    `;
+      </div>`;
     return;
   }
-  if (expedition.runOver){
-    els.expeditionView.innerHTML = renderExpeditionResult();
-    return;
-  }
-  const enemy = expedition.enemy || createExpeditionEnemy(expedition.floor);
-  const hpPercent = Math.max(0, Math.round((enemy.hp || 0) / Math.max(1, enemy.maxHp || 1) * 100));
+  if (expedition.runOver){ els.expeditionView.innerHTML = renderExpeditionResult(); return; }
+
   const teamPercent = Math.max(0, Math.round(expedition.teamHp / Math.max(1, expedition.maxTeamHp) * 100));
-  const intent = expedition.intent || expeditionIntentMeta.attack;
+  const busy = expedition.rewards.length || expedition.runOver || expedition.riskGate || expedition.dungeon;
+  const wtMeta = getEnemyTierMeta({ tier: expedition.waveTier, boss: expedition.waveTier==="boss"||expedition.waveTier==="hidden", hidden: expedition.waveTier==="hidden", elite: expedition.waveTier==="elite" });
+  const statusHtml = `
+    <section class="expedition-panel battle-status">
+      <div class="bs-head"><h2>第 ${expedition.floor} 战 · 光明壁垒</h2><span class="enemy-badge enemy-tier" style="--enemy-color:${wtMeta.color}">${wtMeta.label}</span></div>
+      <div class="wall-bar ${teamPercent<33?"low":""}" title="光明壁垒"><i style="width:${teamPercent}%"></i><span>壁垒 ${expedition.teamHp}/${expedition.maxTeamHp}</span></div>
+      <div class="overdrive-bar" title="光明审判能量"><i style="width:${expedition.overdrive}%"></i><span>审判 ${Math.floor(expedition.overdrive)}%</span></div>
+      <div class="status-chips">
+        <span class="mini-tag">士气 ${expedition.morale}</span>
+        <span class="mini-tag">星尘 ${expedition.provisions}</span>
+        <span class="mini-tag">护盾 ${expedition.guard}</span>
+        <span class="mini-tag">击退 ${expedition.defeated}</span>
+        <span class="mini-tag">${isCoopMode()?`团队 ${teamScore}`:`无伤战 ${expedition.perfectWaves}`}</span>
+      </div>
+      <div class="expedition-actions">
+        <button class="primary-btn overdrive-btn ${expedition.overdrive>=100?"ready":""}" type="button" data-expedition-overdrive="1" ${expedition.overdrive>=100 && !busy?"":"disabled"}>⚡ 光明审判</button>
+        <button class="ghost-btn" type="button" data-expedition-rest="1" ${expedition.provisions>=3 && expedition.active && !busy?"":"disabled"}>修整</button>
+        <button class="ghost-btn" type="button" data-expedition-shop-open="1" ${expedition.active && !busy?"":"disabled"}>商店</button>
+        <button class="ghost-btn" type="button" data-expedition-settle="1" ${expedition.active?"":"disabled"}>结算</button>
+        <button class="ghost-btn" type="button" data-expedition-undo="1">撤回</button>
+        <button class="ghost-btn" type="button" data-expedition-restart="1">重开</button>
+      </div>
+      ${isCoopMode() ? `<div class="coop-armory">
+        <span class="armory-label">同盟军备 · 团队分 ${teamScore}</span>
+        <button class="ghost-btn" type="button" data-coop-armory="wall" ${teamScore>=14 && !busy?"":"disabled"}>强化壁垒 14</button>
+        <button class="ghost-btn" type="button" data-coop-armory="charge" ${teamScore>=10 && !busy?"":"disabled"}>全队充能 10</button>
+        <button class="ghost-btn" type="button" data-coop-armory="stardust" ${teamScore>=8 && !busy?"":"disabled"}>星尘补给 8</button>
+        <button class="ghost-btn" type="button" data-coop-armory="revive" ${teamScore>=20 && !busy && expedition.reviveUsed?"":"disabled"}>复苏徽记 20</button>
+      </div>` : ""}
+      <div class="relic-strip">${renderRelics()}</div>
+    </section>`;
+
+  if (expedition.dungeon){
+    const nodes = expedition.dungeon.nodes || [];
+    els.expeditionView.innerHTML = `
+      ${statusHtml}
+      <section class="expedition-panel dungeon-panel">
+        <h2>黑域地牢 · 选择前路</h2>
+        <p>每条路风险与奖励不同；越往深处，惊喜与陷阱都越大。</p>
+        <div class="dungeon-grid">
+          ${nodes.map((n,i) => `
+            <div class="dungeon-node node-${n.type}">
+              <span class="dn-sprite">${getSprite(n.sprite)}</span>
+              <strong>${escapeHtml(n.label)}</strong>
+              <span class="dn-desc">${escapeHtml(n.desc)}</span>
+              <div class="dn-actions">
+                ${n.type==="treasure"
+                  ? `<button class="primary-btn" type="button" data-dungeon-node="${i}" data-dungeon-act="open">开盒赌一把</button><button class="ghost-btn" type="button" data-dungeon-node="${i}" data-dungeon-act="skip">忽略</button>`
+                  : `<button class="primary-btn" type="button" data-dungeon-node="${i}" data-dungeon-act="enter">进入</button>`}
+              </div>
+            </div>`).join("")}
+        </div>
+      </section>
+      ${renderPartyRow(true)}
+      ${renderLogPanel()}`;
+    return;
+  }
+
+  const foeGrid = expedition.lane.length
+    ? expedition.lane.map((e,i) => renderFoeCard(e,i)).join("")
+    : `<div class="event">本战已肃清，正在结算。</div>`;
+  const front = expedition.enemy;
+  const focusDetail = front
+    ? `<div class="focus-detail"><strong>焦点：${escapeHtml(front.name)}</strong> · ${escapeHtml(getEnemyTierMeta(front).label)} · ${escapeHtml(front.trait||"")}${front.skills&&front.skills.length?"｜技能："+front.skills.map(sk=>ENEMY_SKILL_META[sk]?ENEMY_SKILL_META[sk].name:sk).join("、"):""}</div>`
+    : "";
+
   const rewardHtml = expedition.rewards.length ? `
     <section class="expedition-panel expedition-copy">
-      <h2>选择遗物</h2>
-      <p>每次过关只能选一件。重复获得同名遗物会叠加效果。</p>
+      <h2>战利遗物 · 三选一</h2>
+      <p>每战只能选一件，重复获得同名遗物会叠加。</p>
       <div class="reward-grid">
         ${expedition.rewards.map(key => {
           const relic = expeditionRelics[key];
@@ -6362,8 +6536,8 @@ function renderExpedition(){
           </button>`;
         }).join("")}
       </div>
-    </section>
-  ` : "";
+    </section>` : "";
+
   const shopRefreshCost = getExpeditionShopRefreshCost();
   const shopOverlayHtml = expedition.shopOpen ? `
     <div class="expedition-shop-drawer" data-expedition-shop-backdrop="1">
@@ -6376,176 +6550,88 @@ function renderExpedition(){
             <button class="close-btn" type="button" data-expedition-shop-close="button" aria-label="关闭">X</button>
           </div>
         </div>
-        <div class="expedition-shop-body">
-          <div class="shop-grid">
-        ${(expedition.shopOffers.length ? expedition.shopOffers : expeditionShopOrder.slice(0, 4)).map(key => {
+        <div class="expedition-shop-body"><div class="shop-grid">
+        ${(expedition.shopOffers.length ? expedition.shopOffers : expeditionShopOrder.slice(0,4)).map(key => {
           const item = expeditionShopItems[key];
           const cost = getExpeditionShopCost(key);
           const rarity = getRarityMeta(item.rarity);
-          const noTreasureTarget = key === "mystery" && players.every(player => player.expeditionTreasure);
+          const noTreasureTarget = key === "mystery" && players.every(p => p.expeditionTreasure);
           const disabled = !expedition.active || expedition.provisions < cost || noTreasureTarget;
-          return `<button class="shop-card ${getRarityClass(rarity.key)}" style="${getRarityStyle(rarity.key)}" type="button" data-expedition-shop="${escapeHtml(key)}" ${disabled ? "disabled" : ""}>
+          return `<button class="shop-card ${getRarityClass(rarity.key)}" style="${getRarityStyle(rarity.key)}" type="button" data-expedition-shop="${escapeHtml(key)}" ${disabled?"disabled":""}>
             <span class="relic-icon" style="${getExpeditionIconStyle(item)}"></span>
             <small class="rarity-badge">${rarity.label}</small>
             <strong>${escapeHtml(item.icon)} ${escapeHtml(item.name)}</strong>
             <small>${cost} 星尘</small>
-            <span>${escapeHtml(noTreasureTarget ? "全员已有宝物，暂时无需购买。" : item.text)}</span>
+            <span>${escapeHtml(noTreasureTarget ? "全员已有宝物。" : item.text)}</span>
           </button>`;
         }).join("")}
-          </div>
-        </div>
+        </div></div>
       </section>
-    </div>
-  ` : "";
-  const rosterHtml = players.map(player => {
-    const role = roles[player.role] || roles.mage;
-    const activeCardKey = player.inventory.find(cardKey => lootCards[cardKey] && lootCards[cardKey].type === "active");
-    const activeCard = activeCardKey ? lootCards[activeCardKey] : null;
-    const treasure = player.expeditionTreasure ? expeditionTreasures[player.expeditionTreasure] : null;
-    const treasureRarity = treasure ? getRarityMeta(treasure.rarity) : null;
-    const disabledByReward = expedition.rewards.length || expedition.runOver;
-    return `<article class="expedition-player" data-pid="${player.id}" style="--player-color:${player.color}">
-      <h3>${escapeHtml(player.name)} · ${escapeHtml(role.icon)} ${escapeHtml(role.name)}</h3>
-      <div class="resource-strip">
-        <span class="mini-tag">${isCoopMode() ? "贡献" : "积分"}：${player.score}</span>
-        <span class="mini-tag">星尘：${player.coins}</span>
-        <span class="mini-tag">奇策：${player.skillCooldown > 0 ? `冷却 ${player.skillCooldown}` : "可用"}</span>
-        <span class="mini-tag ${treasureRarity ? getRarityClass(treasureRarity.key) : ""}" ${treasureRarity ? `style="${getRarityStyle(treasureRarity.key)}"` : ""}>宝物：${treasure ? `${treasureRarity.label} ${treasure.name}` : "空"}</span>
-      </div>
-      <div class="expedition-hit-actions">
-        <button class="primary-btn" type="button" data-expedition-hit="${player.id}" data-expedition-score="1" ${disabledByReward ? "disabled" : ""}>+1</button>
-        <button class="primary-btn" type="button" data-expedition-hit="${player.id}" data-expedition-score="2" ${disabledByReward ? "disabled" : ""}>+2</button>
-        <button class="ghost-btn" type="button" data-expedition-skill="${player.id}" ${disabledByReward || player.skillCooldown > 0 ? "disabled" : ""}>奇策</button>
-        <button class="ghost-btn" type="button" data-expedition-card="${player.id}" ${disabledByReward || !activeCard ? "disabled" : ""}>羁绊</button>
-        <button class="ghost-btn" type="button" data-expedition-treasure="${player.id}" ${disabledByReward || !treasure ? "disabled" : ""}>宝物</button>
-      </div>
-      <div class="mini-tag wide-action">${activeCard ? `可用羁绊：${escapeHtml(activeCard.name)}` : "暂无主动羁绊"}</div>
-    </article>`;
-  }).join("");
-  const front = expedition.enemy;
-  const frontHpPct = front ? Math.max(0, Math.round((front.hp || 0) / Math.max(1, front.maxHp || 1) * 100)) : 0;
-  const waveMeta = getEnemyTierMeta({ tier: expedition.waveTier, boss: expedition.waveTier === "boss" || expedition.waveTier === "hidden", hidden: expedition.waveTier === "hidden", elite: expedition.waveTier === "elite" });
-  const turretIconsHtml = (expedition.laneTurrets || []).map(t => `<span class="turret-slot turret-${t.type}" title="${t.type === "arrow" ? "光弩台" : "星尘井"}">${t.type === "arrow" ? "弩" : "井"}</span>`).join("");
-  const focusChipsHtml = expedition.lane.map((e, i) => `<button class="focus-chip ${i === expedition.focusIndex ? "active" : ""}" type="button" data-expedition-focus="${i}" style="--enemy-color:${e.color || "#9a6fd0"}" title="${escapeHtml(e.name)}">${escapeHtml(e.icon || "黑")}</button>`).join("");
-  const laneBusy = expedition.rewards.length || expedition.runOver || expedition.riskGate;
+    </div>` : "";
+
   els.expeditionView.innerHTML = `
-    <section class="expedition-panel lane-panel">
-      <div class="wave-head">
-        <div><h2>第 ${expedition.floor} 波 · 守卫光明壁垒</h2><p>${describeWave(expedition.waveComposition)}${expedition.spawnQueue.length ? ` · 待涌 ${expedition.spawnQueue.length}` : ""}</p></div>
-        <span class="enemy-badge enemy-tier" style="--enemy-color:${waveMeta.color}">${waveMeta.label}</span>
-      </div>
-      <div class="overdrive-bar" title="光明审判能量"><i style="width:${expedition.overdrive}%"></i><span>审判 ${Math.floor(expedition.overdrive)}%</span></div>
-      <div class="lane-track ${expedition.heat >= 85 ? "lane-hot" : ""}">
-        <div class="light-wall ${teamPercent < 33 ? "wall-cracked" : ""}" style="--wallhp:${teamPercent}" title="光明壁垒 ${expedition.teamHp}/${expedition.maxTeamHp}">
-          <span class="wall-core"></span><span class="wall-hp">${expedition.teamHp}</span>
-        </div>
-        <div class="turret-row">${turretIconsHtml}</div>
-        <div class="lane-mount" id="laneMount"></div>
-        <div class="abyss-rift" style="--surge:${expedition.surge}"></div>
-      </div>
-      <div class="heat-bar" title="连锁热度"><i style="width:${expedition.heat}%"></i><span>${expedition.heat >= 85 ? "曜金狂热" : "热度"} ${Math.floor(expedition.heat)}</span></div>
-      <div class="lane-controls">
-        ${focusChipsHtml}
-        <button class="primary-btn overdrive-btn ${expedition.overdrive >= 100 ? "ready" : ""}" type="button" data-expedition-overdrive="1" ${expedition.overdrive >= 100 && !laneBusy ? "" : "disabled"}>⚡ 光明审判</button>
-        <button class="ghost-btn" type="button" data-expedition-turret="arrow" ${expedition.provisions >= 5 && expedition.laneTurrets.length < 2 && !laneBusy ? "" : "disabled"}>布防·光弩台 5★</button>
-        <button class="ghost-btn" type="button" data-expedition-turret="well" ${expedition.provisions >= 4 && expedition.laneTurrets.length < 2 && !laneBusy ? "" : "disabled"}>布防·星尘井 4★</button>
-      </div>
+    ${statusHtml}
+    <section class="expedition-panel foe-panel">
+      <div class="foe-head"><h2>黑域战团 · 点选集火</h2><span class="chip">${describeWave(expedition.waveComposition)}</span></div>
+      <div class="foe-grid">${foeGrid}</div>
+      ${focusDetail}
     </section>
-    <div class="expedition-hero">
-      ${front ? `<section class="expedition-panel enemy-card enemy-${getEnemyTier(front)}" style="--enemy-color:${front.color || "#9a6fd0"}">
-        <div class="enemy-top">
-          <div class="enemy-portrait" style="${getEnemyPortraitStyle(front)}" title="${escapeHtml(front.name || "敌军")}"></div>
-          <div>
-            <h2>${escapeHtml(front.name || "未知敌军")}</h2>
-            <p>${escapeHtml(front.trait || "敌军正在逼近。")}</p>
-          </div>
-          <span class="enemy-badge enemy-tier">${escapeHtml(getEnemyTierMeta(front).label)}</span>
-        </div>
-        <div class="hp-shell" title="焦点血量"><div class="hp-fill" style="--hp:${frontHpPct}%"></div></div>
-        <div class="resource-strip" style="margin-top:7px">
-          <span class="mini-tag">焦点血量：${front.hp}/${front.maxHp}</span>
-          <span class="mini-tag">逼近：${Math.round(front.dist)}%</span>
-          <span class="mini-tag">黑域护罩：${expedition.shield}</span>
-        </div>
-        <div class="intent-row">
-          <div class="intent-box"><small>${(front.boss || front.hidden) ? "首领意图" : "威胁"}</small><strong>${escapeHtml(intent.icon || "攻")} ${escapeHtml((front.boss || front.hidden) ? (intent.label || "强攻") : "突进壁垒")} ${(front.boss || front.hidden) && intent.value ? `· ${intent.value}` : ""}</strong></div>
-          <div class="intent-box"><small>我方护盾</small><strong>${expedition.guard}</strong></div>
-        </div>
-      </section>` : `<section class="expedition-panel enemy-card"><div class="enemy-top"><div class="enemy-seal" style="--enemy-color:${waveMeta.color}">捷</div><div><h2>本波已肃清</h2><p>选择遗物或迎接下一波黑域涌动。</p></div></div></section>`}
-      <section class="expedition-panel expedition-copy">
-        <h2>远征控台</h2>
-        <div class="expedition-stats">
-          <div class="expedition-stat"><small>光明壁垒</small><strong>${expedition.teamHp}/${expedition.maxTeamHp}</strong></div>
-          <div class="expedition-stat"><small>${isCoopMode() ? "团队总分" : "当前波次"}</small><strong>${isCoopMode() ? teamScore : expedition.floor}</strong></div>
-          <div class="expedition-stat"><small>击退 / 完美波</small><strong>${expedition.defeated} / ${expedition.perfectWaves}</strong></div>
-          <div class="expedition-stat"><small>星尘 / 士气 / 护盾</small><strong>${expedition.provisions} / ${expedition.morale} / ${expedition.guard}</strong></div>
-          <div class="expedition-stat"><small>热度 / 审判</small><strong>${Math.floor(expedition.heat)} / ${Math.floor(expedition.overdrive)}%</strong></div>
-          ${isCoopMode() ? `<div class="expedition-stat"><small>最深波 / Boss</small><strong>${teamBestFloor} / ${teamBossKills}</strong></div>` : `<div class="expedition-stat"><small>Boss / 隐藏</small><strong>${expedition.bossKills} / ${expedition.hiddenBossKills}</strong></div>`}
-        </div>
-        <div class="expedition-actions">
-          <button class="ghost-btn" type="button" data-expedition-rest="1" ${expedition.provisions >= 3 && expedition.active && !laneBusy ? "" : "disabled"}>星尘修整</button>
-          <button class="primary-btn" type="button" data-expedition-shop-open="1" ${expedition.active && !laneBusy ? "" : "disabled"}>远征商店</button>
-          <button class="ghost-btn" type="button" data-expedition-settle="1" ${expedition.active ? "" : "disabled"}>结算战绩</button>
-          <button class="ghost-btn" type="button" data-expedition-undo="1">撤回</button>
-          <button class="ghost-btn" type="button" data-expedition-restart="1">重开</button>
-        </div>
-        <div class="relic-strip">${renderRelics()}</div>
-      </section>
-    </div>
     ${rewardHtml}
     ${shopOverlayHtml}
-    <section class="expedition-panel expedition-copy">
-      <h2>出战队伍</h2>
-      <div class="expedition-roster">${rosterHtml}</div>
-    </section>
-    <section class="expedition-panel expedition-copy">
-      <h2>远征战报</h2>
-      <div class="expedition-log">
-        ${expedition.log.length ? expedition.log.slice(0, 16).map(item => `<div class="event"><strong>${escapeHtml(item.time)}</strong> ${escapeHtml(item.message)}</div>`).join("") : `<div class="event">还没有远征战报。</div>`}
-      </div>
-    </section>
-  `;
-  if (!laneTrackEl){
-    laneTrackEl = document.createElement("div");
-    laneTrackEl.className = "lane-flow";
-    laneTrackEl.id = "laneTrack";
-  }
-  const mount = els.expeditionView.querySelector("#laneMount");
-  if (mount) mount.appendChild(laneTrackEl);
-  renderLaneTrack(laneTrackEl);
+    ${renderPartyRow(false)}
+    ${renderLogPanel()}`;
 }
 
-function renderLaneTrack(container){
-  if (!container) return;
-  const lane = expedition.lane || [];
-  const seen = {};
-  lane.forEach((e, i) => {
-    seen[e.id] = true;
-    let node = container.querySelector(`.lane-enemy[data-eid="${e.id}"]`);
-    if (!node){
-      node = document.createElement("div");
-      node.dataset.eid = e.id;
-      node.innerHTML = `<div class="lane-portrait"><span class="lane-glyph"></span><span class="lane-arch"></span></div><div class="lane-hp"><i></i></div>`;
-      container.appendChild(node);
-    }
-    const hpPct = Math.max(0, Math.round((e.hp || 0) / Math.max(1, e.maxHp || 1) * 100));
-    node.className = `lane-enemy enemy-${getEnemyTier(e)} arch-${e.archetype}${i === expedition.focusIndex ? " focused" : ""}${e.dist > 78 ? " lane-danger" : ""}`;
-    node.style.setProperty("--dist", e.dist);
-    node.style.setProperty("--enemy-color", e.color || "#9a6fd0");
-    node.querySelector(".lane-glyph").textContent = e.icon || "黑";
-    node.querySelector(".lane-arch").textContent = (ARCHETYPE_META[e.archetype] || {}).badge || "";
-    node.querySelector(".lane-hp i").style.width = hpPct + "%";
-    node.onclick = () => {
-      const idx = expedition.lane.indexOf(e);
-      if (idx >= 0 && !expedition.rewards.length){ expedition.focusIndex = idx; expedition.focusLocked = true; render(); saveState(); }
-    };
-  });
-  Array.from(container.children).forEach(child => {
-    if (!seen[child.dataset.eid]){
-      child.classList.add("lane-dead");
-      setTimeout(() => { if (child.parentNode) child.remove(); }, 280);
-    }
-  });
+function generateDungeonNodes(floor){
+  const pool = [
+    {type:"battle", sprite:"crow", label:"黑域战团", desc:"常规一战，稳扎稳打推进。"},
+    {type:"treasure", sprite:"cage", label:"黑域宝箱", desc:"开盒可能是惊喜（遗物/星尘/经验），也可能是陷阱——越深越凶。"},
+    {type:"elite", sprite:"tiger", label:"精英险路", desc:"强敌成群，但战后遗物稀有度提升。"}
+  ];
+  if (floor % 2 === 0) pool.push({type:"rest", sprite:"crane", label:"星语营地", desc:"休整：回复壁垒并充满全队技力，再迎战。"});
+  for (let k = pool.length - 1; k > 0; k--){ const r = Math.floor(Math.random()*(k+1)); const t = pool[k]; pool[k] = pool[r]; pool[r] = t; }
+  return { nodes: pool.slice(0, players.length >= 3 ? 3 : 2) };
+}
+
+function resolveGamble(){
+  const floor = expedition.floor;
+  if (Math.random() < 0.56){
+    const t = Math.random();
+    if (t < 0.4){ const tr = grantRandomExpeditionTreasure(true); if (tr) pushExpeditionLog(`开盒惊喜：${tr.name} 入手！`); else { expedition.provisions += 3 + floor; pushExpeditionLog(`开盒惊喜：星尘 +${3 + floor}。`); } }
+    else if (t < 0.74){ expedition.provisions += 4 + floor; pushExpeditionLog(`开盒惊喜：星尘 +${4 + floor}。`); }
+    else { grantExpeditionXp(4 + floor); pushExpeditionLog(`开盒惊喜：全队经验 +${4 + floor}。`); }
+    flashScreen("rgba(244,227,176,.5)"); burstConfetti(24); playTone("fanfare");
+  } else {
+    const dmg = Math.max(1, Math.min(expedition.teamHp - 1, 2 + Math.floor(floor / 2)));
+    expedition.teamHp = Math.max(1, expedition.teamHp - dmg);
+    const lost = Math.min(expedition.provisions, 1 + Math.floor(floor / 3)); expedition.provisions -= lost;
+    pushExpeditionLog(`开盒陷阱！壁垒 -${dmg}${lost?`，星尘 -${lost}`:""}。`);
+    flashScreen("rgba(192,67,47,.5)"); screenShake(true); playTone("breach");
+  }
+}
+
+function chooseDungeonNode(idx, act){
+  if (!expedition.dungeon) return;
+  const node = expedition.dungeon.nodes[idx];
+  if (!node) return;
+  snapshot();
+  expedition.dungeon = null;
+  if (node.type === "treasure"){
+    if (act === "open") resolveGamble();
+    else { expedition.provisions += 2; expedition.morale += 1; pushExpeditionLog("绕过黑域宝箱，谨慎为上（星尘 +2，士气 +1）。"); }
+  } else if (node.type === "rest"){
+    const heal = 4 + players.length;
+    expedition.teamHp = Math.min(expedition.maxTeamHp, expedition.teamHp + heal);
+    players.forEach(p => p.sp = 100);
+    pushExpeditionLog(`星语营地休整：壁垒 +${heal}，全队技力充满。`);
+    playTone("wave");
+  } else if (node.type === "elite"){
+    expedition.eliteNext = true;
+    pushExpeditionLog("踏上精英险路，强敌将至，遗物更稀有。");
+  }
+  if (expedition.teamHp <= 0){ finishExpeditionRun(false); render(); saveState(); return; }
+  startExpeditionFloor();
+  render(); saveState();
 }
 
 function renderWheelLabels(){
@@ -7432,9 +7518,9 @@ els.expeditionView.addEventListener("click", event => {
     return;
   }
   const focusButton = event.target.closest("button[data-expedition-focus]");
-  if (focusButton){
+  if (focusButton && !focusButton.disabled){
     const idx = Number(focusButton.dataset.expeditionFocus);
-    if (expedition.lane[idx] && !expedition.rewards.length){ expedition.focusIndex = idx; expedition.focusLocked = true; render(); saveState(); }
+    if (expedition.lane[idx] && !expedition.rewards.length && !expedition.dungeon){ expedition.focusIndex = idx; expedition.focusLocked = true; render(); saveState(); }
     return;
   }
   const overdriveButton = event.target.closest("button[data-expedition-overdrive]");
@@ -7442,9 +7528,14 @@ els.expeditionView.addEventListener("click", event => {
     triggerOverdrive();
     return;
   }
-  const turretButton = event.target.closest("button[data-expedition-turret]");
-  if (turretButton && !turretButton.disabled){
-    buyTurret(turretButton.dataset.expeditionTurret);
+  const dungeonButton = event.target.closest("button[data-dungeon-node]");
+  if (dungeonButton && !dungeonButton.disabled){
+    chooseDungeonNode(Number(dungeonButton.dataset.dungeonNode), dungeonButton.dataset.dungeonAct);
+    return;
+  }
+  const armoryButton = event.target.closest("button[data-coop-armory]");
+  if (armoryButton && !armoryButton.disabled){
+    coopArmory(armoryButton.dataset.coopArmory);
     return;
   }
   const startButton = event.target.closest("button[data-expedition-start]");
