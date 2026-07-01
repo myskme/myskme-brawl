@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark" data-themepref="auto">
 <head>
+<script>(function(){try{var p=localStorage.getItem('myskme-theme')||'auto';var d=p==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):p;var e=document.documentElement;e.setAttribute('data-theme',d);e.setAttribute('data-themepref',p)}catch(e){}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MYSKME 大乱斗</title>
@@ -2545,6 +2546,77 @@ body.shaking-strong{animation:shake .46s cubic-bezier(.36,.07,.19,.97)}
 .coop-armory{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(122,200,160,.08);border:1px solid rgba(122,200,160,.25)}
 .armory-label{font-size:12px;font-weight:800;color:#9fe0c0;margin-right:4px}
 @media (max-width:760px){.foe-grid{grid-template-columns:repeat(auto-fill,minmax(94px,1fr))}}
+
+/* ===== 浅色主题（MYSKME 新增，不改深色） ===== */
+:root[data-theme="light"]{
+  /* obsidian surfaces -> warm ivory paper */
+  --void:#f3ead6;
+  --night:#f3ead6;
+  --midnight:#efe4cc;
+  --obsidian-2:#e9dcc0;
+  /* keep the foil gold hues; deepen bright stop slightly so gold text/lines survive on paper */
+  --foil-deep:#7a5c24;
+  --foil:#a8842f;
+  --foil-bright:#c79a3d;
+  /* accents: keep hue, darken the lightest cool/warm a touch for contrast on paper */
+  --ember:#b23a26;
+  --rose:#b23a26;
+  --cinnabar:#a5321f;
+  --coral:#b04a24;
+  --abyss:#3f5f7d;
+  --sky:#3f5f7d;
+  --violet:#6f49c0;
+  --jade:#2f7355;
+  --mint:#39836b;
+  --bronze:#7a5c24;
+  /* text/ink swap: ink was dark (used as fg on gold) - keep dark; paper/white were light text -> dark ink */
+  --ink:#241d10;
+  --paper:#241d10;
+  --white:#241d10;
+  /* glass + hairlines -> translucent warm paper + warmer gold lines */
+  --glass:rgba(250,244,230,.72);
+  --glass-strong:rgba(168,132,47,.14);
+  --line:rgba(122,92,36,.34);
+  --glow-foil:0 0 18px rgba(168,132,47,.28), 0 0 4px rgba(199,154,61,.22);
+  --bevel:inset 0 1px 0 rgba(255,255,255,.6);
+  --shadow:0 16px 40px rgba(84,64,26,.18);
+}
+:root[data-theme="light"] body{color:var(--white);background:radial-gradient(120% 78% at 16% -12%, rgba(178,58,38,.10), transparent 46%),radial-gradient(120% 92% at 88% 112%, rgba(63,95,125,.10), transparent 52%),linear-gradient(180deg, #f7efdd 0%, #f2e8d2 56%, #ede2c8 100%)}
+:root[data-theme="light"] body:before{background:repeating-linear-gradient(135deg, rgba(122,92,36,.06) 0 1px, transparent 1px 18px),linear-gradient(90deg, rgba(255,250,238,.7), rgba(245,232,205,.35) 46%, rgba(255,250,238,.66)),linear-gradient(180deg, rgba(47,115,85,.08), transparent 42%, rgba(165,50,31,.07));opacity:.7}
+:root[data-theme="light"] body:after{background-image:linear-gradient(rgba(36,29,16,.14) 1px, transparent 1px);opacity:.06;mix-blend-mode:multiply}
+:root[data-theme="light"] .panel{background:linear-gradient(180deg, rgba(168,132,47,.12), rgba(255,255,255,.5)),rgba(252,247,235,.82);border-color:rgba(122,92,36,.2)}
+:root[data-theme="light"] .panel-title{border-bottom-color:rgba(36,29,16,.14)}
+:root[data-theme="light"] .chip,:root[data-theme="light"] .ghost-btn{background:linear-gradient(180deg, rgba(168,132,47,.16), rgba(255,250,238,.7)),rgba(250,244,230,.7);color:#241d10;border-color:rgba(122,92,36,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 6px 12px rgba(84,64,26,.12)}
+:root[data-theme="light"] .chip:hover,:root[data-theme="light"] .ghost-btn:hover{background:linear-gradient(180deg, rgba(168,132,47,.24), rgba(245,232,205,.82));border-color:rgba(122,92,36,.55)}
+:root[data-theme="light"] .subtitle,:root[data-theme="light"] .field label,:root[data-theme="light"] .campaign-head span,:root[data-theme="light"] .stat small,:root[data-theme="light"] .intent-box small,:root[data-theme="light"] .reward-card span,:root[data-theme="light"] .result p,:root[data-theme="light"] .surprise-card p,:root[data-theme="light"] .expedition-copy p,:root[data-theme="light"] .enemy-card p{color:rgba(36,29,16,.72)}
+:root[data-theme="light"] .setup .field small,:root[data-theme="light"] .log-line,:root[data-theme="light"] .party-sub,:root[data-theme="light"] .expedition-actions small{color:rgba(36,29,16,.7)}
+:root[data-theme="light"] .field input,:root[data-theme="light"] .field select{background:rgba(255,252,244,.9);color:#241d10;border-color:rgba(122,92,36,.28)}
+:root[data-theme="light"] .expedition-panel{background:linear-gradient(180deg, rgba(250,244,230,.82), rgba(245,236,215,.92));border-color:rgba(122,92,36,.24)}
+:root[data-theme="light"] .expedition-art{background:radial-gradient(circle at 50% 46%, rgba(168,132,47,.14), transparent 42%),linear-gradient(180deg, rgba(255,250,238,.04), rgba(230,216,188,.7)),none center / contain no-repeat;background-color:#efe2c6;border-bottom-color:rgba(122,92,36,.2)}
+:root[data-theme="light"] .enemy-stage,:root[data-theme="light"] .role-stage,:root[data-theme="light"] .foe-stage{background-color:#efe2c6}
+:root[data-theme="light"] .enemy-stage:after,:root[data-theme="light"] .role-stage:after{background:linear-gradient(180deg, transparent 42%, rgba(230,216,188,.6))}
+:root[data-theme="light"] .toast{background:rgba(250,244,230,.94);color:#241d10;border-color:rgba(122,92,36,.32)}
+:root[data-theme="light"] .settle-card{background:linear-gradient(180deg,rgba(252,247,235,.98),rgba(245,236,215,.99));border-color:var(--foil-deep)}
+:root[data-theme="light"] .overdrive-bar,:root[data-theme="light"] .heat-bar,:root[data-theme="light"] .wall-bar,:root[data-theme="light"] .sp-bar,:root[data-theme="light"] .foe-hp,:root[data-theme="light"] .foe-atb,:root[data-theme="light"] .lane-hp{background:rgba(122,92,36,.16)}
+:root[data-theme="light"] .overdrive-bar span,:root[data-theme="light"] .heat-bar span,:root[data-theme="light"] .wall-bar span,:root[data-theme="light"] .sp-bar span{text-shadow:0 1px 2px rgba(255,255,255,.6)}
+:root[data-theme="light"] .brand-watermark{background:rgba(250,244,230,.55);color:rgba(60,46,18,.8);border-color:rgba(122,92,36,.3)}
+:root[data-theme="light"] a[href*="myskme-hub"]{background:rgba(250,244,230,.85)!important;color:#7a5c24!important;border-color:rgba(122,92,36,.5)!important}
+:root[data-theme="light"] .score-actions button:hover{background:rgba(122,92,36,.18)}
+
+.ctrl{position:fixed;right:14px;bottom:14px;z-index:2147483001;display:flex;gap:8px;background:linear-gradient(180deg,#15110a,rgba(20,16,10,.97));border:1px solid rgba(201,166,74,.4);border-radius:999px;padding:5px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+:root[data-theme="light"] .ctrl{background:linear-gradient(180deg,#f2e8d2,rgba(242,232,210,.97));border-color:rgba(150,105,30,.4)}
+.ctrl button{width:38px;height:38px;border-radius:50%;border:1px solid transparent;background:transparent;color:#e8c768;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+:root[data-theme="light"] .ctrl button{color:#6f5410}
+.ctrl button:hover{border-color:#c9a64a}
+@media print{.ctrl{display:none}}
+
+
+/* 大乱斗浅色补丁：header + 玩家卡 + 徽记瓦 */
+:root[data-theme="light"] .header{background:linear-gradient(135deg,rgba(255,250,238,.94),rgba(255,236,205,.74)),linear-gradient(90deg,rgba(185,51,45,.10),rgba(90,125,156,.08))!important;border-color:rgba(150,105,30,.28)!important}
+:root[data-theme="light"] .header h1,:root[data-theme="light"] .header .brand-title,:root[data-theme="light"] .header [class*=title]{-webkit-text-fill-color:#6f5410!important;color:#6f5410!important;background:none!important}
+:root[data-theme="light"] .player-card{background:linear-gradient(135deg,rgba(255,236,176,.5),transparent 42%),linear-gradient(160deg,color-mix(in srgb,var(--player-color,#b0894a) 22%,#fff6df),#fdf3dd 82%)!important;border-color:rgba(150,105,30,.3)!important}
+:root[data-theme="light"] .player-card *{color:#241d10}
+:root[data-theme="light"] .player-card .role-art,:root[data-theme="light"] .player-card .role-art *{color:#c9a86a;-webkit-text-fill-color:#c9a86a}
 </style>
 </head>
 <body data-stage-tab="score" data-aux-tab="game">
@@ -7719,5 +7791,17 @@ render();
 </script>
 
 <a href="https://myskme.github.io/myskme-hub/" target="_top" rel="noopener" style="position:fixed;left:12px;bottom:12px;z-index:2147483000;font:600 12px/1 -apple-system,'Songti SC','STSong',serif;letter-spacing:.05em;color:#c9a64a;background:rgba(10,10,12,.78);border:1px solid rgba(201,166,74,.45);padding:7px 11px;text-decoration:none;border-radius:3px;opacity:.6;transition:opacity .25s,box-shadow .25s" onmouseover="this.style.opacity=1;this.style.boxShadow='0 0 18px rgba(201,166,74,.4)'" onmouseout="this.style.opacity=.6;this.style.boxShadow='none'">← 作品总目</a>
+<div class="ctrl"><button id="themeBtn" title="切换主题">◐</button></div>
+<script>
+(function(){var TLS='myskme-theme',order=['auto','light','dark'],name={auto:'跟随系统',light:'浅色',dark:'深色'},icon={auto:'◐',light:'☀',dark:'☾'},mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+function pref(){try{return localStorage.getItem(TLS)||'auto'}catch(e){return 'auto'}}
+function resolve(p){return p==='auto'?((mq&&mq.matches)?'dark':'light'):p}
+function apply(p){var e=document.documentElement;e.setAttribute('data-theme',resolve(p));e.setAttribute('data-themepref',p);var b=document.getElementById('themeBtn');if(b){b.textContent=icon[p];b.title='主题：'+name[p]}}
+var _tb=document.getElementById('themeBtn');
+if(_tb)_tb.addEventListener('click',function(){var nx=order[(order.indexOf(pref())+1)%order.length];try{localStorage.setItem(TLS,nx)}catch(e){}apply(nx)});
+if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(pref()==='auto')apply('auto')});
+apply(pref());
+})();
+</script>
 </body>
 </html>
