@@ -1,5 +1,7 @@
 # MYSKME 大乱斗
 
+**线上地址：** https://myskme.github.io/myskme-brawl/ ｜ **作品总目：** https://myskme.github.io/myskme-hub/
+
 > 《狼先生与他的学生们》世界观 · 课堂积分对战工具（iPad / 投屏版）
 > 以"三国课堂军师争霸积分器"的玩法引擎为基底，整体换皮为 MYSKME 世界观。
 
