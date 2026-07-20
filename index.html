@@ -2617,6 +2617,20 @@ body.shaking-strong{animation:shake .46s cubic-bezier(.36,.07,.19,.97)}
 :root[data-theme="light"] .player-card{background:linear-gradient(135deg,rgba(255,236,176,.5),transparent 42%),linear-gradient(160deg,color-mix(in srgb,var(--player-color,#b0894a) 22%,#fff6df),#fdf3dd 82%)!important;border-color:rgba(150,105,30,.3)!important}
 :root[data-theme="light"] .player-card *{color:#241d10}
 :root[data-theme="light"] .player-card .role-art,:root[data-theme="light"] .player-card .role-art *{color:#c9a86a;-webkit-text-fill-color:#c9a86a}
+/* 浅色主题补漏(2026-07-20)：0708 加主题切换时,下面这几块的卡片底色改成了浅色,
+   但里面的文字颜色还是为深色主题写死的近白(#f0e6d2 / rgba(244,239,230,.x)),
+   浅色下实测对比度 ~1.07:1 = 基本隐形。而浅色是 pref='auto' 跟随系统的默认值——
+   白天用 iPad 投屏的老师看到的正是这一版。套路照抄上面 .player-card 那两行：
+   先把整块压成深色文字,再把金色装饰件豁免回来保住黑金调性。 */
+:root[data-theme="light"] .settle-card *{color:#241d10}
+:root[data-theme="light"] .settle-card .settle-score,
+:root[data-theme="light"] .settle-card .settle-teamscore,
+:root[data-theme="light"] .settle-card .settle-tier,
+:root[data-theme="light"] .settle-card .settle-champion strong{color:#8a6a1e;-webkit-text-fill-color:#8a6a1e}
+:root[data-theme="light"] .settle-card .settle-teamscore small,
+:root[data-theme="light"] .settle-card .settle-champion span{color:rgba(36,29,16,.72)}
+:root[data-theme="light"] .expedition-player *{color:#241d10}
+:root[data-theme="light"] .focus-detail{color:rgba(36,29,16,.72)}
 </style>
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%2317140f%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%23c9a24d%22%20stroke-width%3D%222%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222.6%22%20fill%3D%22%23c9a24d%22/%3E%3C/svg%3E">
@@ -5207,8 +5221,10 @@ function settleExpeditionRun(){
 
 function reviveExpeditionRun(){
   if (!expedition.runOver || expedition.endedBy !== "defeat" || expedition.reviveUsed) return;
+  // 口令跟上全生态轮换(0715 mrwolf4358→myskme4358, 0717 再轮换)——这里被两轮都漏掉了,
+  // 一直还是最好猜的 "myskme"。课堂续命是老师权限,学生猜中就能自己复活。
   const password = (prompt("请输入管理员续命密码") || "").trim();
-  if (password !== "myskme"){
+  if (password !== "myskme4358"){
     showToast("密码不正确，未续命。");
     playTone("soft");
     return;
